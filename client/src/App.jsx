@@ -5,7 +5,7 @@ import Button from './components/Button'
 function App() {
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }} className="container-app" >
+      <div className="container-app" >
         <Item
           name="Producto uno"
           price={199.99}

@@ -75,4 +75,14 @@ button:focus-visible {
   border-bottom: 1px solid #ccc;
 }
 
+.container-app {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  justify-content: space-between;
+  padding: 20px;
+  border: solid 1px #ccc;
+  border-radius: 20px;
+}
+
 
