@@ -1,4 +1,4 @@
-import ProductList from './pages/ProductList/ProductList.jsx';
+import ProductList from './pages/ProductList/index.jsx';
 
 export const App = () => {
   return (
