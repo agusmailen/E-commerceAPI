@@ -1,21 +1,28 @@
 import './styles.css';
 
-const ItemList = ({title, description, price, image}) => {
+const ItemList = ({item}) => {
+  console.log(item);
+  const {
+    imagen,
+    nombre,
+    descripcion,
+    precio
+  } = item;
   return (
       <div class="product-card">
         <div class="product-image">
-            <img src={image} alt="Producto" />
+            <img src={imagen} alt="Producto" />
         </div>
         <div class="product-info">
-          <h3 class="product-title">{title}</h3>
-          <p class="product-description">{description}</p>
+          <h3 class="product-title">{nombre}</h3>
+          <p class="product-description">{descripcion}</p>
           <div class="product-price-section">
             <div>
-              <span class="product-price">{price}</span>
+              <span class="product-price">{precio}</span>
             </div>
           </div>
           <div class="product-actions">
-            <button class="add-to-cart-btn" data-id="${product.id}">
+            <button class="add-to-cart-btn">
               🛒 Agregar al Carrito
             </button>
           </div>

@@ -4,10 +4,8 @@ const categorias = [
   { nombre: 'Todas', icono: '🧾' },
   { nombre: 'Tecnología', icono: '📱' },
   { nombre: 'Moda', icono: '👕' },
-  { nombre: 'Hogar', icono: '🏠' },
   { nombre: 'Deportes', icono: '⚽' },
   { nombre: 'Libros', icono: '📚' },
-  { nombre: 'Gaming', icono: '🎮' },
 ];
 
 const Categorias = ({ categoriaSeleccionada, setCategoria }) => (
