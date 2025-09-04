@@ -10,3 +10,21 @@ body {
   color: #1e293b;
   line-height: 1.6;
 }
+
+.product-list-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px 40px 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+.products-items {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+}

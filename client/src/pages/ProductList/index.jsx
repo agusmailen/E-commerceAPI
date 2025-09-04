@@ -1,10 +1,14 @@
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import { useEffect, useState } from 'react';
 
+import { useEffect, useState } from 'react';
+import './styles.css';
+import  Categorias from '../../components/Categories';
+import Header from '../../components/Header';
+import ItemList from '../../components/ItemList';
 
 const ProducList = () => {
   const [productos, setProductos] = useState([]);
+
+  const [categoria, setCategoria] = useState('Todas');
 
   useEffect(() => {
     fetch('http://localhost:3000/productos')
@@ -16,11 +20,19 @@ const ProducList = () => {
 
   return (
     <>
-       <Container maxWidth="sm">
-         <Box component="section" sx={{ p: 2, border: '1px dashed grey' }}>
-
-        </Box>
-      </Container>
+      <Header />
+      <div className='product-list-container'>
+        <Categorias categoriaSeleccionada={categoria} setCategoria={setCategoria} />
+        <div className='products-grid'>
+          <ItemList productos={productos} categoria={categoria} />
+          <ItemList productos={productos} categoria={categoria} />
+          <ItemList productos={productos} categoria={categoria} />
+          <ItemList productos={productos} categoria={categoria} />
+          <ItemList productos={productos} categoria={categoria} />
+          <ItemList productos={productos} categoria={categoria} />
+          <ItemList productos={productos} categoria={categoria} />
+        </div>
+      </div>
     </>
   );
 }
