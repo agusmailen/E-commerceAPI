@@ -17,7 +17,7 @@
   background: #f1f5f9;
   border: 2px solid transparent;
   border-radius: 12px;
-  padding: 18px 32px;
+  padding: 18px 22px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,6 +26,7 @@
   font-size: 16px;
   transition: border 0.2s, background 0.2s;
   min-width: 120px;
+  font-size: 14px;
 }
 
 .categoria-btn.selected {
