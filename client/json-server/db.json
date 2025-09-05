@@ -32,7 +32,7 @@
       ],
       "categoria": "Fotografía",
       "descripcion": "Cámara mirrorless profesional con sensor full-frame de 45MP",
-      "stock": 8,
+      "stock": 0,
       "detalles": {
         "sensor": "45MP Full-Frame CMOS",
         "video": "8K RAW",
@@ -52,7 +52,7 @@
       ],
       "categoria": "Deportes",
       "descripcion": "Guantes profesionales de boxeo con protección extra",
-      "stock": 20,
+      "stock": 0,
       "detalles": {
         "peso": "14 oz",
         "material": "Cuero genuino",
@@ -72,7 +72,7 @@
       ],
       "categoria": "Tecnología",
       "descripcion": "Reloj inteligente con monitoreo avanzado de salud",
-      "stock": 25,
+      "stock": 0,
       "detalles": {
         "pantalla": "1.4 pulgadas AMOLED",
         "bateria": "361mAh",

@@ -147,3 +147,8 @@
 .add-to-cart-btn:hover {
     transform: translateY(-2px);
 }
+
+.out-of-stock-btn {
+  background: #cbd5e1;
+  color: #64748b;
+}

@@ -16,7 +16,6 @@ const ProducList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-
     const obtenerProductosPorCategoria = async () => {
       setCargando(true);
       setError(null);

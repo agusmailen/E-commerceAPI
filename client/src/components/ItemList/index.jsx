@@ -6,7 +6,8 @@ const ItemList = ({item}) => {
     imagen,
     nombre,
     descripcion,
-    precio
+    precio,
+    stock
   } = item;
   return (
       <div class="product-card">
@@ -22,9 +23,15 @@ const ItemList = ({item}) => {
             </div>
           </div>
           <div class="product-actions">
-            <button class="add-to-cart-btn">
-              🛒 Agregar al Carrito
-            </button>
+            {
+              stock > 0 ? 
+                <button class="add-to-cart-btn">
+                🛒 Agregar al Carrito
+                </button> 
+              : <button class="add-to-cart-btn out-of-stock-btn" disabled>
+                  Sin stock
+                </button>
+            }
           </div>
         </div>
       </div>
