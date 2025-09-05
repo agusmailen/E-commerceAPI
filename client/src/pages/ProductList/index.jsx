@@ -4,6 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
 import './styles.css';
+
 import  Categorias from '../../components/Categories';
 import Header from '../../components/Header';
 import ItemList from '../../components/ItemList';
@@ -11,14 +12,36 @@ import ItemList from '../../components/ItemList';
 const ProducList = () => {
   const [productos, setProductos] = useState([]);
   const [categoria, setCategoria] = useState('Todas');
-  const [isLoading, setIsLoading] = useState(true);
+  const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3000/productos?categoria=' + (categoria === 'Todas' ? '' : categoria))
-      .then(res => res.json())
-      .then(data => [setProductos(data), setIsLoading(false)])
-      .catch(() => [setError("Error al cargar los productos"), setIsLoading(false)]);
+
+    const obtenerProductosPorCategoria = async () => {
+      setCargando(true);
+      setError(null);
+
+      try {
+        const url = categoria === 'Todas'
+          ? 'http://localhost:3000/productos'
+          : `http://localhost:3000/productos?categoria=${categoria}`;
+
+        const respuesta = await fetch(url);
+
+        if (!respuesta.ok) {
+          throw new Error('Error al obtener los datos de los productos.');
+        }
+        const data = await respuesta.json();
+
+        setProductos(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setCargando(false);
+      }
+    };
+
+    obtenerProductosPorCategoria();
   }, [categoria]);
 
  return (
@@ -30,7 +53,7 @@ const ProducList = () => {
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: 'red' }}>
           Error: {error}
         </Box>
-      ) : isLoading ? (
+      ) : cargando ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
           <CircularProgress />
         </Box>
