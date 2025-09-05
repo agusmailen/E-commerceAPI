@@ -41,3 +41,18 @@
     font-size: 18px;
     padding: 8px;
 }
+
+.stock-info {
+    margin-left: 16px;
+    font-size: 14px;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.quantity-btn:disabled:hover {
+    background: #f8fafc;
+    color: #3b82f6;
+}
