@@ -1,0 +1,45 @@
+.product-gallery {
+    position: sticky;
+    top: 120px;
+}
+
+.main-image {
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    border-radius: 16px;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 120px;
+    margin-bottom: 20px;
+    border: 1px solid #e2e8f0;
+}
+
+.thumbnail-gallery {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    border: 2px solid #e2e8f0;
+    transition: all 0.2s;
+}
+
+.thumbnail:hover {
+    border-color: #3b82f6;
+}
+
+.thumbnail.active {
+    border-color: #3b82f6;
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+}
