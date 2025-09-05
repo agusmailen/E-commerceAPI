@@ -1,0 +1,46 @@
+.categorias-container {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+}
+
+.categorias-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 12px;
+  justify-content: center;
+}
+
+.categoria-btn {
+  background: #f1f5f9;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: border 0.2s, background 0.2s;
+  min-width: 120px;
+  font-size: 14px;
+}
+
+.categoria-btn.selected {
+  border: 2px solid #3b82f6;
+  background: #e0e7ff;
+}
+
+.categoria-btn:hover {
+  border: 2px solid #3b82f6;
+  background: #e0e7ff;
+}
+
+.categoria-icon {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
