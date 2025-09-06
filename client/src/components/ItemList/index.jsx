@@ -10,19 +10,19 @@ const ItemList = ({item}) => {
     stock
   } = item;
   return (
-      <div class="product-card">
-        <div class="product-image">
+      <div class="product-list-card">
+        <div class="product-list-image">
             <img src={imagen} alt="Producto" />
         </div>
-        <div class="product-info">
-          <h3 class="product-title">{nombre}</h3>
-          <p class="product-description">{descripcion}</p>
-          <div class="product-price-section">
+        <div class="product-list-info">
+          <h3 class="product-list-title">{nombre}</h3>
+          <p class="product-list-description">{descripcion}</p>
+          <div class="product-list-price-section">
             <div>
-              <span class="product-price">{precio}</span>
+              <span class="product-list-price">{precio}</span>
             </div>
           </div>
-          <div class="product-actions">
+          <div class="product-list-actions">
             {
               stock > 0 ? 
                 <button class="add-to-cart-btn">

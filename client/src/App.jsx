@@ -4,7 +4,8 @@ import ProductInfoPage from './pages/ProductInfo';
 export const App = () => {
   return (
     <>
-      <ProductInfoPage />
+      {/* <ProductInfoPage /> */}
+      <ProductList />
     </>
   );
 }
