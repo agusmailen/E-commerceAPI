@@ -1,16 +1,13 @@
 import './styles.css';
 
-import React, { useState } from 'react';
-import './styles.css';
+import React from 'react';
 
-export const Header = ({ setBusqueda }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
-
+export const Header = () => {
   return (
     <header>
       <nav className="navbar">
         <div className="nav-container">
-          <a href="home.html" className="logo">
+          <a href="#" className="logo" onClick={(e) => e.preventDefault()}>
             <div className="logo-icon">🛍️</div>
             <span>ShopHub</span>
           </a>
@@ -19,26 +16,16 @@ export const Header = ({ setBusqueda }) => {
               type="text"
               className="header-search-input"
               placeholder="Buscar productos..."
-              onChange={e => setBusqueda(e.target.value)}
             />
             <button className="header-search-btn">
               🔍
             </button>
           </div>
-          <button
-            className="hamburger"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Abrir menú"
-          >
-            <span />
-            <span />
-            <span />
-          </button>
-          <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-            <a href="home.html" className="nav-link">Inicio</a>
-            <a href="productos.html" className="nav-link">Productos</a>
-            <a href="login.html" className="btn-secondary">Iniciar Sesión</a>
-            <a href="register.html" className="btn-primary">Crear Cuenta</a>
+          <div className="nav-links">
+            <a href="#" className="nav-link" onClick={(e) => e.preventDefault()}>Inicio</a>
+            <a href="#" className="nav-link" onClick={(e) => e.preventDefault()}>Productos</a>
+            <a href="#" className="btn-secondary" onClick={(e) => e.preventDefault()}>Iniciar Sesión</a>
+            <a href="#" className="btn-primary" onClick={(e) => e.preventDefault()}>Crear Cuenta</a>
           </div>
         </div>
       </nav>

@@ -22,8 +22,8 @@ const ProducList = () => {
 
       try {
         const url = categoria === 'Todas'
-          ? 'http://localhost:3000/productos'
-          : `http://localhost:3000/productos?categoria=${categoria}`;
+          ? 'http://localhost:3001/productos'
+          : `http://localhost:3001/productos?categoria=${categoria}`;
 
         const respuesta = await fetch(url);
 
