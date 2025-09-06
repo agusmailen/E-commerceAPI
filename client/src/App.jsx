@@ -11,10 +11,10 @@ export const App = () => {
       
       {/* Home/Product List View */}
       {/* <ProductList /> */} 
-      <Register />
+      {/* <Register /> */}
       
       {/* Login View */}
-      {/* <Login /> */}
+       <Login />
       
       {/* Product Info View */}
       {/* <ProductInfoPage /> */}
