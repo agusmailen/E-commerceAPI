@@ -1,0 +1,60 @@
+/* Wrapper con gradiente SOLO para el registro */
+.reg-page{
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  padding:20px;
+  background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+}
+
+/* Card */
+.reg-card{
+  width:100%; max-width:480px; background:#fff; border-radius:20px;
+  box-shadow:0 25px 50px -12px rgba(0,0,0,.25); padding:36px;
+}
+
+/* Branding */
+.reg-logoRow{display:flex; align-items:center; gap:12px; margin-bottom:8px;}
+.reg-logoIcon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;
+  color:#fff;background:linear-gradient(135deg,#3b82f6,#8b5cf6);font-size:22px;}
+.reg-logoText{font-weight:700;font-size:26px;color:#0f172a;}
+.reg-welcome{color:#64748b;margin-bottom:18px}
+
+/* Mensajes */
+.reg-message{border-radius:10px;padding:12px 14px;font-size:14px;margin-bottom:16px}
+.reg-error{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}
+.reg-success{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
+
+/* Formulario */
+.reg-form{display:flex;flex-direction:column;gap:12px}
+.reg-label{font-weight:500;color:#374151;font-size:14px}
+.reg-input{
+  width:100%;padding:12px 14px;border:2px solid #e5e7eb;border-radius:12px;
+  font-size:16px;background:#f9fafb;outline:none;transition:border-color .15s,background .15s,box-shadow .15s;
+}
+.reg-input:focus{border-color:#3b82f6;background:#fff;box-shadow:0 0 0 3px rgba(59,130,246,.12)}
+
+/* Password */
+.reg-passwordRow{position:relative}
+.reg-eyeBtn{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  border:none;background:transparent;cursor:pointer;font-size:18px;color:#6b7280;
+}
+.reg-eyeBtn:hover{color:#3b82f6}
+
+/* Botones */
+.reg-primaryBtn{
+  background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;border:none;
+  padding:14px 18px;border-radius:12px;font-weight:600;font-size:16px;cursor:pointer;
+  transition:transform .15s,box-shadow .15s;margin-top:6px;
+}
+.reg-primaryBtn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(59,130,246,.28)}
+.reg-primaryBtn:disabled{opacity:.7;cursor:not-allowed}
+
+.reg-actions{margin-top:10px;text-align:center}
+.reg-linkBtn{appearance:none;border:none;background:transparent;color:#3b82f6;font-weight:600;cursor:pointer}
+.reg-linkBtn:hover{text-decoration:underline}
+
+/* Responsive */
+@media (max-width:480px){
+  .reg-card{padding:28px 20px}
+  .reg-logoText{font-size:22px}
+}

@@ -9,7 +9,7 @@ import  Categorias from '../../components/Categories';
 import Header from '../../components/Header';
 import ItemList from '../../components/ItemList';
 
-const ProducList = () => {
+const ProducList = ({ onCreateAccount }) => {
   const [productos, setProductos] = useState([]);
   const [categoria, setCategoria] = useState('Todas');
   const [cargando, setCargando] = useState(true);
@@ -45,7 +45,7 @@ const ProducList = () => {
 
  return (
   <>
-    <Header />
+    <Header onCreateAccount={onCreateAccount} />
     <div className='product-list-container'>
       <Categorias categoriaSeleccionada={categoria} setCategoria={setCategoria} />
       {error ? (

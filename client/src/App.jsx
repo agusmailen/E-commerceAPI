@@ -1,11 +1,16 @@
-import ProductList from './pages/ProductList/index.jsx';
-import ProductInfoPage from './pages/ProductInfo';
+import { useState } from "react";
+import ProductList from "./pages/ProductList/index.jsx"; // tu Home
+import Register from "./pages/Register";
 
-export const App = () => {
+export default function App() {
+  const [page, setPage] = useState("home"); // 'home' | 'register'
+
   return (
     <>
-      {/* <ProductInfoPage /> */}
-      <ProductList />
+      {page === "home" && <ProductList onCreateAccount={() => setPage("register")} />}
+      {page === "register" && (
+        <Register onCancel={() => setPage("home")} onSuccess={() => setPage("home")} />
+      )}
     </>
   );
 }

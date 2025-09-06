@@ -3,7 +3,7 @@ import './styles.css';
 import React, { useState } from 'react';
 import './styles.css';
 
-export const Header = ({ setBusqueda }) => {
+export const Header = ({ setBusqueda, onCreateAccount }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -38,7 +38,7 @@ export const Header = ({ setBusqueda }) => {
             <a href="home.html" className="nav-link">Inicio</a>
             <a href="productos.html" className="nav-link">Productos</a>
             <a href="login.html" className="btn-secondary">Iniciar Sesión</a>
-            <a href="register.html" className="btn-primary">Crear Cuenta</a>
+            <button onClick={onCreateAccount} className="btn-primary">Crear Cuenta</button>
           </div>
         </div>
       </nav>
