@@ -1,8 +1,12 @@
 import './styles.css';
 
-import React from 'react';
+import React, { useState } from 'react';
+import { useCart } from '../../context/CartContext';
+import CartModal from '../CartModal';
 
 export const Header = () => {
+  const { getCartItemsCount } = useCart();
+  const [isCartOpen, setIsCartOpen] = useState(false);
   return (
     <header>
       <nav className="navbar">
@@ -24,11 +28,18 @@ export const Header = () => {
           <div className="nav-links">
             <a href="#" className="nav-link" onClick={(e) => e.preventDefault()}>Inicio</a>
             <a href="#" className="nav-link" onClick={(e) => e.preventDefault()}>Productos</a>
+            <button 
+              className="cart-button" 
+              onClick={() => setIsCartOpen(true)}
+            >
+              🛒 Carrito ({getCartItemsCount()})
+            </button>
             <a href="#" className="btn-secondary" onClick={(e) => e.preventDefault()}>Iniciar Sesión</a>
             <a href="#" className="btn-primary" onClick={(e) => e.preventDefault()}>Crear Cuenta</a>
           </div>
         </div>
       </nav>
+      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   );
 };
