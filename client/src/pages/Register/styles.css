@@ -1,0 +1,278 @@
+/* Estilos específicos para el componente Register */
+/* Estos estilos solo se aplican al contenedor del registro, no afectan la app principal */
+
+.register-page-container {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: #1e293b;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.register-form-container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 40px;
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+}
+
+.register-logo-section {
+  margin-bottom: 30px;
+}
+
+.register-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.register-logo-icon {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+}
+
+.register-welcome-text {
+  color: #64748b;
+  font-size: 16px;
+}
+
+.register-form-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.register-form-group {
+  margin-bottom: 20px;
+  text-align: left;
+  flex: 1;
+}
+
+.register-form-group.full-width {
+  flex: none;
+}
+
+.register-form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #374151;
+  font-size: 14px;
+}
+
+.register-form-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.2s;
+  background: #f9fafb;
+}
+
+.register-form-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.register-form-input::placeholder {
+  color: #9ca3af;
+}
+
+.register-form-input:disabled {
+  background: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.register-password-container {
+  position: relative;
+}
+
+.register-password-toggle {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.register-password-toggle:hover:not(:disabled) {
+  color: #3b82f6;
+}
+
+.register-password-toggle:disabled {
+  color: #d1d5db;
+  cursor: not-allowed;
+}
+
+.register-btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-bottom: 25px;
+}
+
+.register-btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+}
+
+.register-btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.register-btn-primary:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.register-login-link {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.register-login-link a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-login-link a:hover {
+  text-decoration: underline;
+}
+
+.register-error-message {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  border: 1px solid #fecaca;
+  display: none;
+}
+
+.register-error-message.show {
+  display: block;
+}
+
+.register-success-message {
+  background: #f0fdf4;
+  color: #16a34a;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  border: 1px solid #bbf7d0;
+  display: none;
+}
+
+.register-success-message.show {
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .register-form-container {
+    padding: 30px 20px;
+    margin: 10px;
+  }
+
+  .register-logo {
+    font-size: 24px;
+  }
+
+  .register-logo-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .register-form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+/* Animaciones para mejor UX */
+@keyframes registerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.register-error-message.show,
+.register-success-message.show {
+  animation: registerFadeIn 0.3s ease-out;
+}
+
+/* Estados de focus mejorados para accesibilidad */
+.register-form-input:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.register-btn-primary:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Indicador de carga */
+.register-btn-primary:disabled::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: registerSpin 1s ease-in-out infinite;
+  margin-left: 8px;
+}
+
+@keyframes registerSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}

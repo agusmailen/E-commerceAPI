@@ -1,4 +1,43 @@
 {
+  "usuarios": [
+    {
+      "id": 1,
+      "email": "admin@shophub.com",
+      "password": "admin123",
+      "nombre": "Administrador",
+      "rol": "admin"
+    },
+    {
+      "id": 2,
+      "email": "usuario@shophub.com",
+      "password": "usuario123",
+      "nombre": "Usuario Demo",
+      "rol": "cliente"
+    },
+    {
+      "id": 3,
+      "email": "juan@shophub.com",
+      "password": "juan123",
+      "nombre": "Juan Pérez",
+      "rol": "cliente"
+    },
+    {
+      "id": 4,
+      "email": "maria@shophub.com",
+      "password": "maria123",
+      "nombre": "María García",
+      "rol": "cliente"
+    },
+    {
+      "id": "1757173479660",
+      "firstName": "juani",
+      "lastName": "molina",
+      "nombre": "juani molina",
+      "email": "juaniiii@gmail.com",
+      "username": "juani",
+      "password": "miprofe_01"
+    }
+  ],
   "productos": [
     {
       "id": 1,
@@ -259,36 +298,6 @@
         "aislamiento": "24 horas frío/caliente",
         "color": "Verde militar"
       }
-    }
-  ],
-  "usuarios": [
-    {
-      "id": 1,
-      "email": "admin@shophub.com",
-      "password": "admin123",
-      "nombre": "Administrador",
-      "rol": "admin"
-    },
-    {
-      "id": 2,
-      "email": "usuario@shophub.com",
-      "password": "usuario123",
-      "nombre": "Usuario Demo",
-      "rol": "cliente"
-    },
-    {
-      "id": 3,
-      "email": "juan@shophub.com",
-      "password": "juan123",
-      "nombre": "Juan Pérez",
-      "rol": "cliente"
-    },
-    {
-      "id": 4,
-      "email": "maria@shophub.com",
-      "password": "maria123",
-      "nombre": "María García",
-      "rol": "cliente"
     }
   ]
 }

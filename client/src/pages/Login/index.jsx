@@ -80,7 +80,7 @@ const Login = ({ onNavigateHome, onLogin }) => {
 
   const authenticateUser = async (email, password) => {
     try {
-      const response = await fetch('http://localhost:3001/usuarios');
+      const response = await fetch('http://localhost:3000/usuarios');
       const usuarios = await response.json();
       
       const usuario = usuarios.find(user => 
