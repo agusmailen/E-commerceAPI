@@ -5,17 +5,19 @@ import { CartProvider } from './context/CartContext';
 
 export const App = () => {
   return (
-    <CartProvider>
-      {/* Switch views by commenting/uncommenting the lines below */}
-      
-      {/* Home/Product List View */}
-      <ProductList />
-      
+    <>
       {/* Login View */}
       {/* <Login /> */}
       
-      {/* Product Info View */}
-      {/* <ProductInfoPage /> */}
-    </CartProvider>
+      <CartProvider>
+        {/* Switch views by commenting/uncommenting the lines below */}
+        
+        {/* Home/Product List View */}
+        <ProductList />
+        
+        {/* Product Info View */}
+        {/* <ProductInfoPage /> */}
+      </CartProvider>
+    </>
   );
 }
