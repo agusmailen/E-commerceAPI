@@ -1,12 +1,10 @@
 import './styles.css';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useCart } from '../../context/CartContext';
-import CartModal from '../CartModal';
 
-export const Header = () => {
+export const Header = ({ currentView, setCurrentView }) => {
   const { getCartItemsCount } = useCart();
-  const [isCartOpen, setIsCartOpen] = useState(false);
   return (
     <header>
       <nav className="navbar">
@@ -26,11 +24,15 @@ export const Header = () => {
             </button>
           </div>
           <div className="nav-links">
-            <a href="#" className="nav-link" onClick={(e) => e.preventDefault()}>Inicio</a>
-            <a href="#" className="nav-link" onClick={(e) => e.preventDefault()}>Productos</a>
             <button 
-              className="cart-button" 
-              onClick={() => setIsCartOpen(true)}
+              className={`nav-link ${currentView === 'productos' ? 'active' : ''}`}
+              onClick={() => setCurrentView('productos')}
+            >
+              Productos
+            </button>
+            <button 
+              className={`cart-button ${currentView === 'carrito' ? 'active' : ''}`}
+              onClick={() => setCurrentView('carrito')}
             >
               🛒 Carrito ({getCartItemsCount()})
             </button>
@@ -39,7 +41,6 @@ export const Header = () => {
           </div>
         </div>
       </nav>
-      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   );
 };
