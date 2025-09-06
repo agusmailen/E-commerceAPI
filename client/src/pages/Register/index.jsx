@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { register } from '../../services/authService';
+import { registerUser } from '../../services/authService';
 import './styles.css';
 
 /**
@@ -76,7 +76,7 @@ export default function Register({ navigateTo }) {
 
     try {
       // Llamada al servicio de registro
-      const response = await register(payload);
+      const response = await registerUser(payload);
 
       if (!response.ok) {
         setError(response.error || 'Error al registrar usuario.');
