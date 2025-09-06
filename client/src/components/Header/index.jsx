@@ -1,8 +1,10 @@
 import './styles.css';
 
 import React from 'react';
+import { useCart } from '../../context/CartContext';
 
-export const Header = () => {
+export const Header = ({ currentView, setCurrentView }) => {
+  const { getCartItemsCount } = useCart();
   return (
     <header>
       <nav className="navbar">
@@ -22,8 +24,18 @@ export const Header = () => {
             </button>
           </div>
           <div className="nav-links">
-            <a href="#" className="nav-link" onClick={(e) => e.preventDefault()}>Inicio</a>
-            <a href="#" className="nav-link" onClick={(e) => e.preventDefault()}>Productos</a>
+            <button 
+              className={`nav-link ${currentView === 'productos' ? 'active' : ''}`}
+              onClick={() => setCurrentView('productos')}
+            >
+              Productos
+            </button>
+            <button 
+              className={`cart-button ${currentView === 'carrito' ? 'active' : ''}`}
+              onClick={() => setCurrentView('carrito')}
+            >
+              🛒 Carrito ({getCartItemsCount()})
+            </button>
             <a href="#" className="btn-secondary" onClick={(e) => e.preventDefault()}>Iniciar Sesión</a>
             <a href="#" className="btn-primary" onClick={(e) => e.preventDefault()}>Crear Cuenta</a>
           </div>
