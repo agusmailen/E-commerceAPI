@@ -1,5 +1,14 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "473a",
+      "firstName": "juani",
+      "lastName": "molina",
+      "email": "juaniiii@gmail.com",
+      "username": "juani",
+      "password": "juani_01"
+    }
+  ],
   "productos": [
     {
       "id": 1,
