@@ -9,7 +9,7 @@
   grid-template-columns: 1fr;
 }
 
-.product-card {
+.product-list-card {
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 16px;
@@ -21,7 +21,7 @@
   height: 100%;
 }
 
-.product-card:hover {
+.product-list-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
 }
@@ -37,7 +37,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.product-image {
+.product-list-image {
   height: 200px;
   background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
   display: flex;
@@ -48,7 +48,7 @@
   position: relative;
 }
 
-.product-image img {
+.product-list-image img {
   max-width: 100%;
 }
 
@@ -60,27 +60,7 @@
   border-radius: 12px;
 }
 
-.product-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: linear-gradient(135deg, #ef4444, #dc2626);
-  color: white;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.product-badge.sale {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-}
-
-.product-badge.new {
-  background: linear-gradient(135deg, #10b981, #059669);
-}
-
-.product-info {
+.product-list-info {
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -91,7 +71,7 @@
   padding: 20px 20px 20px 0;
 }
 
-.product-title {
+.product-list-title {
   font-weight: 600;
   font-size: 18px;
   margin-bottom: 8px;
@@ -99,35 +79,29 @@
   line-height: 1.4;
 }
 
-.product-description {
+.product-list-description {
   color: #64748b;
   font-size: 14px;
   margin-bottom: 16px;
   line-height: 1.5;
 }
 
-.product-rating {
+
+.product-list-price-section {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  margin-top: auto;
 }
 
-.product-price-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-    margin-top: auto;
-}
-
-.product-price {
+.product-list-price {
     color: #059669;
     font-weight: 700;
     font-size: 20px;
 }
 
-.product-actions {
+.product-list-actions {
   margin-top: auto;
 }
 
