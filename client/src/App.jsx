@@ -4,32 +4,32 @@ import ProductList from './pages/ProductList/index.jsx';
 import ProductInfoPage from './pages/ProductInfo';
 import Login from './pages/Login';
 import ProductManagement from './pages/ProductManagement/index.jsx';
+import CartView from './components/CartView';
 import { CartProvider } from './context/CartContext';
 
 export const App = () => {
   return (
     <>
   {/* Switch views by commenting/uncommenting the lines below */}
-  {/* Home View */}
-  <Home />
-  {/* Product List View */}
-  {/* <ProductList /> */}
+
   {/* Login View */}
   {/* <Login /> */}
-  {/* Product Info View */}
-  {/* <ProductInfoPage /> */}
-      {/* Login View */}
-      {/* <Login /> */}
-      
-      <CartProvider>
-        {/* Switch views by commenting/uncommenting the lines below */}
-        
-        {/* Product Management View */}
-        <ProductManagement />
-        
-        {/* Product Info View */}
-        {/* <ProductInfoPage /> */}
-      </CartProvider>
-    </>
+  {/* Register View */}
+  {/* <Register /> */}
+  <CartProvider>
+    {/* Switch views by commenting/uncommenting the lines below */}
+    
+    {/* Home View */}
+    {/* <Home /> */}
+    {/* Product List View */}
+    <ProductList />  
+    {/* Product Info View */}
+    {/* <ProductInfoPage /> */}
+    {/* Product Management View */}
+    {/* <ProductManagement /> */}
+    {/* Cart View */}
+    {/* <CartView /> */}
+  </CartProvider>
+  </>
   );
 }
