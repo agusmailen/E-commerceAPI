@@ -1,0 +1,115 @@
+.pm-container {
+  padding: 24px;
+  padding-top: 100px; /* Account for fixed header */
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: #0f172a;
+}
+
+.pm-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0 0 16px;
+}
+
+.pm-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.pm-panel {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  min-height: 560px;
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.15);
+}
+
+.pm-primary {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.pm-field {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px;
+  margin-top: 14px;
+}
+
+.pm-input { width: 100%; color: #334155; font-weight: 600; border: none; outline: none; font-size: 14px; background: transparent; }
+.pm-input::placeholder { color: #64748b; font-weight: 600; }
+.pm-select { cursor: pointer; }
+
+.pm-gradient {
+  margin-top: 16px;
+  background: linear-gradient(90deg, #3b82f6, #7c3aed);
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.pm-secondary { margin-top: 16px; margin-left: 8px; background: #e2e8f0; color: #0f172a; border: none; padding: 12px 18px; border-radius: 10px; font-weight: 700; }
+.pm-actions { display: flex; align-items: center; }
+
+.pm-chip {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.pm-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 14px 0;
+}
+
+.pm-card-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.pm-card-sub {
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.pm-card-actions { display: flex; gap: 10px; }
+
+.pm-row { display: flex; align-items: center; gap: 10px; margin: 8px 0 12px; }
+.pm-label { color: #475569; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+.pm-muted { color: #64748b; }
+
+.pm-btn {
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+.pm-edit { background: #2563eb; }
+.pm-delete { background: #ef4444; }
+
+@media (max-width: 1000px) {
+  .pm-panels {
+    grid-template-columns: 1fr;
+  }
+}
+
+
