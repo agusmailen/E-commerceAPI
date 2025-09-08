@@ -1,7 +1,7 @@
 {
   "productos": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "Ray-Ban Aviator Classic",
       "precio": 189.99,
       "imagen": "https://picsum.photos/id/1059/800/600",
@@ -21,7 +21,7 @@
       }
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "Cámara Canon EOS R5",
       "precio": 3899.99,
       "imagen": "https://picsum.photos/id/250/800/600",
@@ -41,7 +41,7 @@
       }
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "Guantes de Boxeo Pro",
       "precio": 89.99,
       "imagen": "https://picsum.photos/id/345/800/600",
@@ -61,7 +61,7 @@
       }
     },
     {
-      "id": 4,
+      "id": "4",
       "nombre": "Smartwatch Galaxy Watch 5",
       "precio": 299.99,
       "imagen": "https://picsum.photos/id/160/800/600",
@@ -81,7 +81,7 @@
       }
     },
     {
-      "id": 5,
+      "id": "5",
       "nombre": "Zapatillas Running Pro",
       "precio": 129.99,
       "imagen": "https://picsum.photos/id/400/800/600",
@@ -101,7 +101,7 @@
       }
     },
     {
-      "id": 6,
+      "id": "6",
       "nombre": "Laptop Gaming ROG",
       "precio": 1999.99,
       "imagen": "https://picsum.photos/id/201/800/600",
@@ -121,7 +121,7 @@
       }
     },
     {
-      "id": 7,
+      "id": "7",
       "nombre": "Raqueta de Tenis Pro",
       "precio": 199.99,
       "imagen": "https://picsum.photos/id/450/800/600",
@@ -141,7 +141,7 @@
       }
     },
     {
-      "id": 8,
+      "id": "8",
       "nombre": "Drone DJI Air 2S",
       "precio": 999.99,
       "imagen": "https://picsum.photos/id/300/800/600",
@@ -161,7 +161,7 @@
       }
     },
     {
-      "id": 9,
+      "id": "9",
       "nombre": "Bicicleta Mountain Bike",
       "precio": 799.99,
       "imagen": "https://picsum.photos/id/146/800/600",
@@ -181,7 +181,7 @@
       }
     },
     {
-      "id": 10,
+      "id": "10",
       "nombre": "Auriculares Sony WH-1000XM5",
       "precio": 399.99,
       "imagen": "https://picsum.photos/id/325/800/600",
@@ -201,7 +201,7 @@
       }
     },
     {
-      "id": 11,
+      "id": "11",
       "nombre": "Mochila Fotográfica Pro",
       "precio": 149.99,
       "imagen": "https://picsum.photos/id/250/800/600",
@@ -221,7 +221,7 @@
       }
     },
     {
-      "id": 12,
+      "id": "12",
       "nombre": "Pelota de Fútbol Profesional",
       "precio": 49.99,
       "imagen": "https://picsum.photos/id/358/800/600",
@@ -241,7 +241,7 @@
       }
     },
     {
-      "id": 13,
+      "id": "13",
       "nombre": "Termo Stanley Classic",
       "precio": 44.99,
       "imagen": "https://picsum.photos/id/225/800/600",
@@ -259,32 +259,60 @@
         "aislamiento": "24 horas frío/caliente",
         "color": "Verde militar"
       }
+    },
+    {
+      "id": "18e2",
+      "nombre": "Playstation 5",
+      "descripcion": "PSN",
+      "precio": 45000,
+      "imagen": "https://picsum.photos/seed/new/800/600",
+      "imagenes": [
+        "https://picsum.photos/seed/new/800/600"
+      ],
+      "categoria": "Electronica",
+      "stock": 30,
+      "estado": "activo",
+      "detalles": {}
+    },
+    {
+      "id": "6c98",
+      "nombre": "Playstation 4",
+      "descripcion": "PSN",
+      "precio": 320000,
+      "imagen": "https://picsum.photos/seed/new/800/600",
+      "imagenes": [
+        "https://picsum.photos/seed/new/800/600"
+      ],
+      "categoria": "Electronica",
+      "stock": 10,
+      "estado": "activo",
+      "detalles": {}
     }
   ],
   "usuarios": [
     {
-      "id": 1,
+      "id": "1",
       "email": "admin@shophub.com",
       "password": "admin123",
       "nombre": "Administrador",
       "rol": "admin"
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "usuario@shophub.com",
       "password": "usuario123",
       "nombre": "Usuario Demo",
       "rol": "cliente"
     },
     {
-      "id": 3,
+      "id": "3",
       "email": "juan@shophub.com",
       "password": "juan123",
       "nombre": "Juan Pérez",
       "rol": "cliente"
     },
     {
-      "id": 4,
+      "id": "4",
       "email": "maria@shophub.com",
       "password": "maria123",
       "nombre": "María García",
