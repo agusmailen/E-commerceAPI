@@ -7,10 +7,11 @@ import Header from "../../src/components/Header";
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
 
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("http://localhost:3001/productos");
+        const res = await fetch("http://localhost:3000/productos");
         if (!res.ok) throw new Error("Error al obtener productos");
         const productos = await res.json();
         // Selecciona los primeros 4 productos con stock > 0 como destacados
