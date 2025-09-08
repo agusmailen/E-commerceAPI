@@ -10,7 +10,7 @@ import Header from '../../components/Header';
 import ItemList from '../../components/ItemList';
 import CartView from '../../components/CartView';
 
-const ProducList = () => {
+const ProducList = ({ onCreateAccount }) => {
   const [productos, setProductos] = useState([]);
   const [categoria, setCategoria] = useState('Todas');
   const [currentView, setCurrentView] = useState('productos'); // 'productos' o 'carrito'
