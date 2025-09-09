@@ -75,17 +75,7 @@ const ProductList = () => {
           <CircularProgress />
         </Box>
       ) : (
-        <div className="products-grid">
-          {productos.length === 0 ? (
-            <div className="no-products">
-              <p>No se encontraron productos.</p>
-            </div>
-          ) : (
-            productos.map(producto => (
-              <ItemList key={producto.id} item={producto} />
-            ))
-          )}
-        </div>
+        <ItemList productos={productos} />
       )}
     </div>
   );

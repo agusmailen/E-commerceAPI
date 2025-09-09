@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -39,8 +40,16 @@ const ProductList = () => {
             productosData = await response.json();
           }
         }
+          : `http://localhost:3000/productos?categoria=${categoria}`;
 
-        setProductos(productosData);
+        const respuesta = await fetch(url);
+
+        if (!respuesta.ok) {
+          throw new Error('Error al obtener los datos de los productos.');
+        }
+        const data = await respuesta.json();
+
+        setProductos(data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -48,47 +57,42 @@ const ProductList = () => {
       }
     };
 
-    obtenerProductos();
-  }, [categoria, searchTerm]);
+    obtenerProductosPorCategoria();
+  }, [categoria, currentView]);
 
-  return (
+ return (
+  <>
+    <Header currentView={currentView} setCurrentView={setCurrentView} />
     <div className='product-list-container'>
-      {/* Mostrar término de búsqueda si existe */}
-      {searchTerm && (
-        <div className="search-results-header">
-          <h2>Resultados para: "{searchTerm}"</h2>
-          <p>{productos.length} producto(s) encontrado(s)</p>
-        </div>
-      )}
-      
-      {/* Solo mostrar categorías si no hay búsqueda activa */}
-      {!searchTerm && (
-        <Categorias categoriaSeleccionada={categoria} setCategoria={setCategoria} />
-      )}
-      
-      {error ? (
-        <div className="error-message">
-          <p>Error: {error}</p>
-        </div>
-      ) : cargando ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
-          <CircularProgress />
-        </Box>
-      ) : (
-        <div className="products-grid">
-          {productos.length === 0 ? (
-            <div className="no-products">
-              <p>No se encontraron productos.</p>
-            </div>
+      {currentView === 'productos' ? (
+        <>
+          <Categorias categoriaSeleccionada={categoria} setCategoria={setCategoria} />
+          {error ? (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: 'red' }}>
+              Error: {error}
+            </Box>
+          ) : cargando ? (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+              <CircularProgress />
+            </Box>
+          ) : productos.length === 0 ? (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+              No hay productos para mostrar!
+            </Box>
           ) : (
-            productos.map(producto => (
-              <ItemList key={producto.id} item={producto} />
-            ))
+            <div className='products-grid'>
+              {productos.map(product => (
+                <ItemList key={product.id} item={product} />
+              ))}
+            </div>
           )}
-        </div>
+        </>
+      ) : (
+        <CartView setCurrentView={setCurrentView} />
       )}
     </div>
-  );
-};
+  </>
+);
+}
 
-export default ProductList;
+export default ProducList;
