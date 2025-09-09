@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './styles.css';
 
-const Login = ({ onNavigateHome, onLogin }) => {
+const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -18,11 +20,9 @@ const Login = ({ onNavigateHome, onLogin }) => {
     const usuarioGuardado = localStorage.getItem('usuario');
     if (usuarioGuardado) {
       // User is already logged in, redirect to home
-      if (onNavigateHome) {
-        onNavigateHome();
-      }
+      navigate('/');
     }
-  }, [onNavigateHome]);
+  }, [navigate]);
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -115,11 +115,9 @@ const Login = ({ onNavigateHome, onLogin }) => {
         
         setIsAnimating(true);
         
-        // Use the onLogin callback to handle session management
+        // Navigate to home after successful login
         setTimeout(() => {
-          if (onLogin) {
-            onLogin(usuario);
-          }
+          navigate('/');
         }, 2000);
       } else {
         setLoginMessage({
@@ -127,7 +125,7 @@ const Login = ({ onNavigateHome, onLogin }) => {
           text: 'Credenciales incorrectas. Verifica tu email y contraseña.'
         });
       }
-    } catch (error) {
+    } catch (err) {
       setLoginMessage({
         type: 'error',
         text: 'Error de conexión. Intenta nuevamente.'
@@ -198,11 +196,16 @@ const Login = ({ onNavigateHome, onLogin }) => {
 
         <div className="login-footer">
           <p className="register-text">
-            ¿No tienes una cuenta? <a href="#" className="register-link">Registrate aqui</a>
+            ¿No tienes una cuenta? <button 
+              className="register-link" 
+              onClick={() => navigate('/register')}
+            >
+              Registrate aqui
+            </button>
           </p>
           <button 
             className="back-to-home-btn" 
-            onClick={onNavigateHome}
+            onClick={() => navigate('/')}
             disabled={isLoading || isAnimating}
           >
             ← Volver al inicio

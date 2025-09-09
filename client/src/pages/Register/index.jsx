@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../../services/authService';
 import './styles.css';
 
@@ -7,9 +8,10 @@ import './styles.css';
  * Utiliza useState para manejar el estado del formulario (Clase 05)
  * Implementa validaciones y manejo de eventos (Clase 03)
  * Conecta con json-server usando fetch/async-await (Clase 03)
- * Recibe navigateTo como prop para navegación con useState
+ * Usa React Router para navegación
  */
-export default function Register({ navigateTo }) {
+export default function Register() {
+  const navigate = useNavigate();
   // Estados para cada campo del formulario
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -95,9 +97,9 @@ export default function Register({ navigateTo }) {
       setPassword('');
       setConfirmPassword('');
       
-      // Redirigir después de 2 segundos usando navigateTo
+      // Redirigir después de 2 segundos usando React Router
       setTimeout(() => {
-        navigateTo('home');
+        navigate('/');
       }, 2000);
 
     } catch (error) {
@@ -303,7 +305,15 @@ export default function Register({ navigateTo }) {
         <p className="register-login-link">
           ¿Ya tienes una cuenta? <button 
             type="button" 
-            onClick={() => navigateTo('home')}
+            onClick={() => navigate('/login')}
+            style={{background: 'none', border: 'none', color: '#3b82f6', textDecoration: 'underline', cursor: 'pointer'}}
+          >
+            Iniciar sesión
+          </button>
+          {' '}o{' '}
+          <button 
+            type="button" 
+            onClick={() => navigate('/')}
             style={{background: 'none', border: 'none', color: '#3b82f6', textDecoration: 'underline', cursor: 'pointer'}}
           >
             Volver a productos
