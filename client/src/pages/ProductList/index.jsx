@@ -8,7 +8,7 @@ import './styles.css';
 import  Categorias from '../../components/Categories';
 import Header from '../../components/Header';
 import ItemList from '../../components/ItemList';
-import CartView from '../../components/CartView';
+import CartView from '../Cart';
 
 const ProducList = ({ onCreateAccount }) => {
   const [productos, setProductos] = useState([]);

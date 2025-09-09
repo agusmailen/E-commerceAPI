@@ -1,10 +1,18 @@
 import './styles.css';
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 
 export const Header = ({ currentView, setCurrentView }) => {
   const { getCartItemsCount } = useCart();
+  const navigate = useNavigate();
+  
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('usuario');
+    navigate('/login');
+  };
   return (
     <header>
       <nav className="navbar">
@@ -36,8 +44,9 @@ export const Header = ({ currentView, setCurrentView }) => {
             >
               🛒 Carrito ({getCartItemsCount()})
             </button>
-            <a href="#" className="btn-secondary" onClick={(e) => e.preventDefault()}>Iniciar Sesión</a>
-            <a href="#" className="btn-primary" onClick={(e) => e.preventDefault()}>Crear Cuenta</a>
+            <button className="btn-secondary" onClick={handleLogout}>
+              Cerrar Sesión
+            </button>
           </div>
         </div>
       </nav>
