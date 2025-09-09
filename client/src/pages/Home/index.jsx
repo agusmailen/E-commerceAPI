@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import "./styles.css";
-import Header from "../../src/components/Header";
+import Header from "../../components/Header";
 
 
 export default function Home() {
