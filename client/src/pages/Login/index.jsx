@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './styles.css';
 
-const Login = ({ onNavigateHome, onLogin }) => {
+const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -13,16 +15,6 @@ const Login = ({ onNavigateHome, onLogin }) => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [showCredentials, setShowCredentials] = useState(false);
 
-  // Check if user is already logged in
-  useEffect(() => {
-    const usuarioGuardado = localStorage.getItem('usuario');
-    if (usuarioGuardado) {
-      // User is already logged in, redirect to home
-      if (onNavigateHome) {
-        onNavigateHome();
-      }
-    }
-  }, [onNavigateHome]);
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -115,11 +107,13 @@ const Login = ({ onNavigateHome, onLogin }) => {
         
         setIsAnimating(true);
         
-        // Use the onLogin callback to handle session management
+        // Save authentication state and user data to localStorage
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('usuario', JSON.stringify(usuario));
+        
+        // Redirect to products page after success animation
         setTimeout(() => {
-          if (onLogin) {
-            onLogin(usuario);
-          }
+          navigate('/products');
         }, 2000);
       } else {
         setLoginMessage({
@@ -198,15 +192,14 @@ const Login = ({ onNavigateHome, onLogin }) => {
 
         <div className="login-footer">
           <p className="register-text">
-            ¿No tienes una cuenta? <a href="#" className="register-link">Registrate aqui</a>
+            ¿No tienes una cuenta? <button 
+              className="register-link" 
+              onClick={() => navigate('/register')}
+              disabled={isLoading || isAnimating}
+            >
+              Registrate aqui
+            </button>
           </p>
-          <button 
-            className="back-to-home-btn" 
-            onClick={onNavigateHome}
-            disabled={isLoading || isAnimating}
-          >
-            ← Volver al inicio
-          </button>
         </div>
 
         <div className="demo-credentials-section">

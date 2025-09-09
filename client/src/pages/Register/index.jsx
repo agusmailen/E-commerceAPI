@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../../services/authService';
 import './styles.css';
 
@@ -9,7 +10,8 @@ import './styles.css';
  * Conecta con json-server usando fetch/async-await (Clase 03)
  * Recibe navigateTo como prop para navegación con useState
  */
-export default function Register({ navigateTo }) {
+export default function Register() {
+  const navigate = useNavigate();
   // Estados para cada campo del formulario
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -95,9 +97,13 @@ export default function Register({ navigateTo }) {
       setPassword('');
       setConfirmPassword('');
       
-      // Redirigir después de 2 segundos usando navigateTo
+      // Auto-login after successful registration
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('usuario', JSON.stringify(result.user));
+      
+      // Redirigir después de 2 segundos usando navigate
       setTimeout(() => {
-        navigateTo('home');
+        navigate('/products');
       }, 2000);
 
     } catch (error) {
@@ -303,10 +309,10 @@ export default function Register({ navigateTo }) {
         <p className="register-login-link">
           ¿Ya tienes una cuenta? <button 
             type="button" 
-            onClick={() => navigateTo('home')}
+            onClick={() => navigate('/login')}
             style={{background: 'none', border: 'none', color: '#3b82f6', textDecoration: 'underline', cursor: 'pointer'}}
           >
-            Volver a productos
+            Iniciar Sesión
           </button>
         </p>
       </div>

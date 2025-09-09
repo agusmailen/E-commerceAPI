@@ -1,35 +1,43 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from '../pages/Home';
 import Register from "./pages/Register";
 import ProductList from './pages/ProductList/index.jsx';
 import ProductInfoPage from './pages/ProductInfo';
 import Login from './pages/Login';
 import ProductManagement from './pages/ProductManagement/index.jsx';
-import CartView from './components/CartView';
+import CartView from './pages/Cart';
+import ProtectedRoute from './components/ProtectedRoute';
 import { CartProvider } from './context/CartContext';
 
 export const App = () => {
   return (
-    <>
-  {/* Switch views by commenting/uncommenting the lines below */}
-
-  {/* Login View */}
-  {/* <Login /> */}
-  {/* Register View */}
-  {/* <Register /> */}
-  <CartProvider>
-    {/* Switch views by commenting/uncommenting the lines below */}
-    
-    {/* Home View */}
-    {/* <Home /> */}
-    {/* Product List View */}
-    <ProductList />  
-    {/* Product Info View */}
-    {/* <ProductInfoPage /> */}
-    {/* Product Management View */}
-    {/* <ProductManagement /> */}
-    {/* Cart View */}
-    {/* <CartView /> */}
-  </CartProvider>
-  </>
+    <Router>
+      <CartProvider>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<ProductList />} />
+          <Route path="/product/:id" element={<ProductInfoPage />} />
+          
+          {/* Protected routes - require authentication */}
+          <Route path="/cart" element={
+            <ProtectedRoute>
+              <CartView />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/products" element={
+            <ProtectedRoute>
+              <ProductManagement />
+            </ProtectedRoute>
+          } />
+          
+          {/* Redirect to login by default */}
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </CartProvider>
+    </Router>
   );
 }
