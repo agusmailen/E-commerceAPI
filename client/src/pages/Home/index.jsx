@@ -1,14 +1,20 @@
 
 
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./styles.css";
 import Header from "../../components/Header";
-import ProductGallery from "../../components/ProductGallery";
+import ProductCard from "../../components/ProductCard";
 
 
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
+  const navigate = useNavigate();
 
+
+  const handleViewProducts = () => {
+    navigate('/products');
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -20,6 +26,7 @@ export default function Home() {
         const destacados = productos.filter(p => p.stock > 0).slice(0, 4);
         setFeaturedProducts(destacados);
       } catch (err) {
+        console.error('Error fetching products:', err);
         setFeaturedProducts([]);
       }
     };
@@ -35,13 +42,13 @@ export default function Home() {
           <p>
             Encuentra las mejores ofertas en tecnología, moda, hogar y mucho más. Miles de productos con envío rápido y garantía de calidad.
           </p>
-          <button className="hero-btn">Ver Productos</button>
+          <button className="hero-btn" onClick={handleViewProducts}>Ver Productos</button>
         </section>
         <section className="featured-section">
           <h2>Productos Destacados</h2>
           <div className="featured-products">
             {featuredProducts.map((product) => (
-              <ProductGallery key={product.id} product={product} />
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </section>

@@ -9,7 +9,6 @@ const ProductManagement = () => {
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [editingId, setEditingId] = useState(null);
-  const [currentView, setCurrentView] = useState('productos');
   const [apiBase, setApiBase] = useState(API_BASES[0]);
 
   const canSubmit = useMemo(() => {
@@ -119,7 +118,7 @@ const ProductManagement = () => {
 
   return (
     <div className="pm-container">
-      <Header currentView={currentView} setCurrentView={setCurrentView} />
+      <Header />
       <h1 className="pm-title">⚙️ Gestión de Productos</h1>
       <div className="pm-panels">
         <section className="pm-panel pm-left">

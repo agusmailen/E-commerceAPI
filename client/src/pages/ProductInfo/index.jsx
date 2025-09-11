@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../../components/Header';
 import Breadcrumb from '../../components/Breadcrumb';
 import ProductGallery from '../../components/ProductGallery';
@@ -8,6 +8,17 @@ import AddToCartButton from '../../components/AddToCartButton';
 import './styles.css';
 
 const ProductInfoPage = () => {
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
+  const [currentProduct, setCurrentProduct] = useState(null);
+
+  const handleQuantityChange = (quantity) => {
+    setSelectedQuantity(quantity);
+  };
+
+  const handleProductLoaded = (product) => {
+    setCurrentProduct(product);
+  };
+
   return (
     <>
       <Header />
@@ -16,12 +27,18 @@ const ProductInfoPage = () => {
         <section className="product-section">
           <div className="product-container">
             <ProductGallery />
-            <div className="product-info-wrapper">
-              <ProductInfo />
+            <div className="pip-wrapper">
+              <ProductInfo onProductLoaded={handleProductLoaded} />
               <div className="add-to-cart-section">
                 <div className="quantity-cart-wrapper">
-                  <QuantitySelector />
-                  <AddToCartButton />
+                  <QuantitySelector 
+                    onQuantityChange={handleQuantityChange} 
+                    product={currentProduct}
+                  />
+                  <AddToCartButton 
+                    quantity={selectedQuantity} 
+                    product={currentProduct}
+                  />
                 </div>
               </div>
             </div>

@@ -1,26 +1,73 @@
 import './styles.css';
 
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 
-export const Header = ({ currentView, setCurrentView }) => {
-  const { getCartItemsCount } = useCart();
+export const Header = () => {
+  const { getCartItemsCount, clearCart } = useCart();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
+  // Check authentication state on component mount and when location changes
+  useEffect(() => {
+    const checkAuth = () => {
+      const authStatus = localStorage.getItem('isLoggedIn') === 'true';
+      setIsAuthenticated(authStatus);
+    };
+    
+    checkAuth();
+    
+    // Listen for storage changes (when logout happens in another tab/window)
+    const handleStorageChange = (e) => {
+      if (e.key === 'isLoggedIn') {
+        checkAuth();
+      }
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, [location.pathname]);
   
   const handleLogout = () => {
+    // Clear localStorage
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('usuario');
+    
+    // Clear sessionStorage (in case it's used elsewhere)
+    sessionStorage.removeItem('isLoggedIn');
+    sessionStorage.removeItem('usuario');
+    
+    // Clear cart items
+    clearCart();
+    
+    // Update local state immediately
+    setIsAuthenticated(false);
+    
+    // Navigate to login
     navigate('/login');
   };
+
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
+  
   return (
     <header>
       <nav className="navbar">
         <div className="nav-container">
-          <a href="#" className="logo" onClick={(e) => e.preventDefault()}>
+          <button 
+            className="logo" 
+            onClick={() => navigate('/')}
+            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+          >
             <div className="logo-icon">🛍️</div>
             <span>ShopHub</span>
-          </a>
+          </button>
           <div className="header-search">
             <input
               type="text"
@@ -33,20 +80,40 @@ export const Header = ({ currentView, setCurrentView }) => {
           </div>
           <div className="nav-links">
             <button 
-              className={`nav-link ${currentView === 'productos' ? 'active' : ''}`}
-              onClick={() => setCurrentView('productos')}
+              className={`nav-link ${isActive('/products') ? 'active' : ''}`}
+              onClick={() => navigate('/products')}
             >
               Productos
             </button>
-            <button 
-              className={`cart-button ${currentView === 'carrito' ? 'active' : ''}`}
-              onClick={() => setCurrentView('carrito')}
-            >
-              🛒 Carrito ({getCartItemsCount()})
-            </button>
-            <button className="btn-secondary" onClick={handleLogout}>
-              Cerrar Sesión
-            </button>
+            {isAuthenticated && (
+              <>
+                <button 
+                  className={`cart-button ${isActive('/cart') ? 'active' : ''}`}
+                  onClick={() => navigate('/cart')}
+                >
+                  🛒 Carrito ({getCartItemsCount()})
+                </button>
+                <button className="btn-secondary" onClick={handleLogout}>
+                  Cerrar Sesión
+                </button>
+              </>
+            )}
+            {!isAuthenticated && (
+              <>
+                <button 
+                  className="nav-link"
+                  onClick={() => navigate('/login')}
+                >
+                  Iniciar Sesión
+                </button>
+                <button 
+                  className="btn-secondary"
+                  onClick={() => navigate('/register')}
+                >
+                  Registrarse
+                </button>
+              </>
+            )}
           </div>
         </div>
       </nav>
