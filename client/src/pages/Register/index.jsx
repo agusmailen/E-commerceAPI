@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
 import { registerUser } from '../../services/authService';
 import './styles.css';
 
@@ -12,6 +13,7 @@ import './styles.css';
  */
 export default function Register() {
   const navigate = useNavigate();
+  const { addToCart } = useCart();
   // Estados para cada campo del formulario
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -100,6 +102,21 @@ export default function Register() {
       // Auto-login after successful registration
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('usuario', JSON.stringify(result.user));
+      
+      // Check if there's a pending cart item to add after registration
+      const pendingCartItem = localStorage.getItem('pendingCartItem');
+      if (pendingCartItem) {
+        try {
+          const { product, quantity } = JSON.parse(pendingCartItem);
+          addToCart(product, quantity);
+          localStorage.removeItem('pendingCartItem'); // Clear the pending item
+          
+          // Update success message to include cart addition
+          setSuccessMessage(`¡Cuenta creada exitosamente! Producto agregado al carrito.`);
+        } catch (error) {
+          console.error('Error adding pending cart item:', error);
+        }
+      }
       
       // Redirigir después de 2 segundos usando navigate
       setTimeout(() => {

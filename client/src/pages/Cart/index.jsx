@@ -1,8 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
+import Header from '../../components/Header';
 import './styles.css';
 
-const CartView = ({ setCurrentView }) => {
+const CartView = () => {
+  const navigate = useNavigate();
   const { 
     cartItems, 
     removeFromCart, 
@@ -17,24 +20,29 @@ const CartView = ({ setCurrentView }) => {
 
   if (cartItems.length === 0) {
     return (
-      <div className="cart-view-container">
-        <div className="empty-cart-view">
-          <h2>Tu carrito está vacío</h2>
-          <p>¡Agrega algunos productos para comenzar!</p>
-          <button 
-            className="continue-shopping-btn-view"
-            onClick={() => setCurrentView('productos')}
-          >
-            Continuar Comprando
-          </button>
+      <>
+        <Header />
+        <div className="cart-view-container">
+          <div className="empty-cart-view">
+            <h2>Tu carrito está vacío</h2>
+            <p>¡Agrega algunos productos para comenzar!</p>
+            <button 
+              className="continue-shopping-btn-view"
+              onClick={() => navigate('/products')}
+            >
+              Continuar Comprando
+            </button>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
   return (
-    <div className="cart-view-container">
-      <h1 className="cart-view-title">Carrito de Compras</h1>
+    <>
+      <Header />
+      <div className="cart-view-container">
+        <h1 className="cart-view-title">Carrito de Compras</h1>
       
       <div className="cart-view-content">
         <div className="cart-items-view">
@@ -100,13 +108,14 @@ const CartView = ({ setCurrentView }) => {
           </button>
           <button 
             className="continue-shopping-btn-view"
-            onClick={() => setCurrentView('productos')}
+            onClick={() => navigate('/products')}
           >
             Continuar Comprando
           </button>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

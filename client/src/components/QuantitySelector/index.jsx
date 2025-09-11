@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import './styles.css';
-import dbData from '../../../json-server/db.json';
 
-const QuantitySelector = () => {
+const QuantitySelector = ({ onQuantityChange, product }) => {
     const [quantity, setQuantity] = useState(1);
     const [stock, setStock] = useState(0);
 
     useEffect(() => {
-        // Simulate fetching stock data from db.json
-        const fetchStock = () => {
-            // Assuming dbData has a structure like { products: [{ id: 1, stock: 10 }, ...] }
-            const product = dbData.products.find(p => p.id === 1); // Example: fetching product with id 1
-            if (product) {
-                setStock(product.stock);
-            }
-        };
-    }, []);
+        // Use product prop to get stock
+        if (product) {
+            setStock(product.stock || 0);
+        }
+    }, [product]);
+
+    useEffect(() => {
+        // Notify parent component of quantity changes
+        if (onQuantityChange) {
+            onQuantityChange(quantity);
+        }
+    }, [quantity, onQuantityChange]);
 
     const decreaseQuantity = () => {
         if (quantity > 1) {

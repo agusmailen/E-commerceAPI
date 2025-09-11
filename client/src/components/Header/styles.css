@@ -90,17 +90,22 @@
   transform: translateY(-1px);
 }
 
+/* Standardized navbar button styles */
 .nav-link {
   color: #64748b;
   text-decoration: none;
   font-weight: 500;
-  padding: 10px 16px;
+  padding: 12px 20px;
   border-radius: 8px;
   transition: all 0.2s;
   background: none;
   border: none;
   cursor: pointer;
   font-size: 14px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-link:hover {
@@ -117,12 +122,16 @@
   background: linear-gradient(135deg, #10b981, #059669);
   color: white;
   border: none;
-  padding: 10px 16px;
+  padding: 12px 20px;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
   font-size: 14px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cart-button:hover {
@@ -139,13 +148,17 @@
   background: linear-gradient(135deg, #3b82f6, #8b5cf6);
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 12px 20px;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: transform 0.2s, box-shadow 0.2s;
+  font-size: 14px;
+  min-height: 44px;
 }
 
 .btn-primary:hover {
@@ -157,13 +170,17 @@
   background: transparent;
   color: #3b82f6;
   border: 2px solid #3b82f6;
-  padding: 8px 18px;
+  padding: 10px 20px;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.2s;
+  font-size: 14px;
+  min-height: 44px;
 }
 
 .btn-secondary:hover {

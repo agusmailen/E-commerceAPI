@@ -1,5 +1,5 @@
 .add-to-cart {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
     color: white;
     border: none;
     padding: 16px 40px;
@@ -8,10 +8,12 @@
     font-size: 18px;
     cursor: pointer;
     flex: 1;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .add-to-cart:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+    background: linear-gradient(135deg, #1d4ed8, #6d28d9);
 }

@@ -8,19 +8,14 @@ import './styles.css';
 import  Categorias from '../../components/Categories';
 import Header from '../../components/Header';
 import ItemList from '../../components/ItemList';
-import CartView from '../Cart';
 
 const ProducList = ({ onCreateAccount }) => {
   const [productos, setProductos] = useState([]);
   const [categoria, setCategoria] = useState('Todas');
-  const [currentView, setCurrentView] = useState('productos'); // 'productos' o 'carrito'
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Solo cargar productos si estamos en la vista de productos
-    if (currentView !== 'productos') return;
-    
     const obtenerProductosPorCategoria = async () => {
       setCargando(true);
       setError(null);
@@ -37,7 +32,17 @@ const ProducList = ({ onCreateAccount }) => {
         }
         const data = await respuesta.json();
 
-        setProductos(data);
+        // Sort products: items with stock first, then items without stock
+        const sortedData = data.sort((a, b) => {
+          // If both have stock or both don't have stock, maintain original order
+          if ((a.stock > 0 && b.stock > 0) || (a.stock === 0 && b.stock === 0)) {
+            return 0;
+          }
+          // Items with stock come first
+          return a.stock > 0 ? -1 : 1;
+        });
+
+        setProductos(sortedData);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -46,37 +51,31 @@ const ProducList = ({ onCreateAccount }) => {
     };
 
     obtenerProductosPorCategoria();
-  }, [categoria, currentView]);
+  }, [categoria]);
 
  return (
   <>
-    <Header currentView={currentView} setCurrentView={setCurrentView} />
+    <Header />
     <div className='product-list-container'>
-      {currentView === 'productos' ? (
-        <>
-          <Categorias categoriaSeleccionada={categoria} setCategoria={setCategoria} />
-          {error ? (
-            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: 'red' }}>
-              Error: {error}
-            </Box>
-          ) : cargando ? (
-            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-              <CircularProgress />
-            </Box>
-          ) : productos.length === 0 ? (
-            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-              No hay productos para mostrar!
-            </Box>
-          ) : (
-            <div className='products-grid'>
-              {productos.map(product => (
-                <ItemList key={product.id} item={product} />
-              ))}
-            </div>
-          )}
-        </>
+      <Categorias categoriaSeleccionada={categoria} setCategoria={setCategoria} />
+      {error ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: 'red' }}>
+          Error: {error}
+        </Box>
+      ) : cargando ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <CircularProgress />
+        </Box>
+      ) : productos.length === 0 ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          No hay productos para mostrar!
+        </Box>
       ) : (
-        <CartView setCurrentView={setCurrentView} />
+        <div className='products-grid'>
+          {productos.map(product => (
+            <ItemList key={product.id} item={product} />
+          ))}
+        </div>
       )}
     </div>
   </>

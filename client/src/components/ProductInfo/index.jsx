@@ -1,29 +1,45 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import './styles.css';
-import dbData from '../../../json-server/db.json';
 
-const ProductInfo = () => {
+const ProductInfo = ({ onProductLoaded }) => {
   const [producto, setProducto] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
-    // Tomar el primer producto del JSON como ejemplo
-    if (dbData.productos && dbData.productos.length > 0) {
-      setProducto(dbData.productos[0]);
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/productos/${id}`);
+        if (response.ok) {
+          const productData = await response.json();
+          setProducto(productData);
+          // Notify parent component that product is loaded
+          if (onProductLoaded) {
+            onProductLoaded(productData);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      }
+    };
+
+    if (id) {
+      fetchProduct();
     }
-  }, []);
+  }, [id, onProductLoaded]);
 
   if (!producto) {
-    return <div className="product-info">Cargando producto...</div>;
+    return <div className="pi-container">Cargando producto...</div>;
   }
 
   return (
-    <div className="product-info">
-      <h1 className="product-title">{producto.nombre}</h1>
-      <div className="product-price">${producto.precio}</div>
-      <p className="product-description">
+    <div className="pi-container">
+      <h1 className="pi-title">{producto.nombre}</h1>
+      <div className="pi-price">${producto.precio}</div>
+      <p className="pi-description">
         {producto.descripcion}
       </p>
-      <div className="product-details">
+      <div className="pi-details">
         <h3>Detalles del producto:</h3>
         <ul>
           {Object.entries(producto.detalles).map(([key, value]) => (

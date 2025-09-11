@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
 import './styles.css';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { addToCart } = useCart();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -110,6 +112,24 @@ const Login = () => {
         // Save authentication state and user data to localStorage
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('usuario', JSON.stringify(usuario));
+        
+        // Check if there's a pending cart item to add after login
+        const pendingCartItem = localStorage.getItem('pendingCartItem');
+        if (pendingCartItem) {
+          try {
+            const { product, quantity } = JSON.parse(pendingCartItem);
+            addToCart(product, quantity);
+            localStorage.removeItem('pendingCartItem'); // Clear the pending item
+            
+            // Update success message to include cart addition
+            setLoginMessage({
+              type: 'success',
+              text: `¡Bienvenido, ${usuario.nombre}! Producto agregado al carrito.`
+            });
+          } catch (error) {
+            console.error('Error adding pending cart item:', error);
+          }
+        }
         
         // Redirect to products page after success animation
         setTimeout(() => {
