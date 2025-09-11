@@ -1,7 +1,9 @@
 
+
 import React, { useEffect, useState } from "react";
 import "./styles.css";
-import Header from "../../src/components/Header";
+import Header from "../../components/Header";
+import ProductGallery from "../../components/ProductGallery";
 
 
 export default function Home() {
@@ -39,13 +41,7 @@ export default function Home() {
           <h2>Productos Destacados</h2>
           <div className="featured-products">
             {featuredProducts.map((product) => (
-              <div className="product-card" key={product.id}>
-                <img src={product.imagen} alt={product.nombre} className="product-img" />
-                <h3>{product.nombre}</h3>
-                <p>{product.descripcion}</p>
-                <span className="product-price">${product.precio}</span>
-                <button className="add-cart-btn">Agregar al Carrito</button>
-              </div>
+              <ProductGallery key={product.id} product={product} />
             ))}
           </div>
         </section>
