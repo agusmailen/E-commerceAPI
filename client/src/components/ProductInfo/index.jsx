@@ -49,6 +49,17 @@ const ProductInfo = ({ onProductLoaded }) => {
           ))}
         </ul>
       </div>
+      {producto.stock === 0 ? (
+        <button className="sin-stock-btn" disabled>
+          Sin stock
+        </button>
+      ) : (
+        <>
+          {/* Aquí iría el botón de agregar al carrito y el quantityselector */}
+          {/* <QuantitySelector ... /> */}
+          {/* <button>Agregar al carrito</button> */}
+        </>
+      )}
     </div>
   );
 };

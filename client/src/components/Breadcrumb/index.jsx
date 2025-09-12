@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './styles.css';
 import dbData from '../../../json-server/db.json';
 
@@ -15,24 +16,18 @@ const Breadcrumb = () => {
   if (!producto) {
     return (
       <nav className="breadcrumb">
-        <a href="home.html">Inicio</a>
+        <Link to="/">Inicio</Link>
         <span className="breadcrumb-separator">›</span>
-        <a href="productos.html">Productos</a>
-        <span className="breadcrumb-separator">›</span>
-        <span>Cargando...</span>
+        <Link to="/products">Productos</Link>
       </nav>
     );
   }
 
   return (
     <nav className="breadcrumb">
-      <a href="home.html">Inicio</a>
+      <Link to="/">Inicio</Link>
       <span className="breadcrumb-separator">›</span>
-      <a href="productos.html">Productos</a>
-      <span className="breadcrumb-separator">›</span>
-      <a href="#">{producto.categoria}</a>
-      <span className="breadcrumb-separator">›</span>
-      <span>{producto.nombre}</span>
+      <Link to="/products">Productos</Link>
     </nav>
   );
 };

@@ -1,3 +1,16 @@
+.sin-stock-btn {
+        background-color: #e53935;
+        color: white;
+            padding: 16px 0;
+            border: none;
+            border-radius: 32px;
+            margin: 24px auto 0 auto;
+            font-weight: bold;
+            width: 70%;
+            font-size: 1.25rem;
+            display: block;
+            text-align: center;
+}
 .pi-container {
     display: flex;
     flex-direction: column;

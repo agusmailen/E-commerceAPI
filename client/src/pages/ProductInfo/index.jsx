@@ -26,20 +26,22 @@ const ProductInfoPage = () => {
         <Breadcrumb />
         <section className="product-section">
           <div className="product-container">
-            <ProductGallery />
+            <ProductGallery product={currentProduct} />
             <div className="pip-wrapper">
               <ProductInfo onProductLoaded={handleProductLoaded} />
               <div className="add-to-cart-section">
-                <div className="quantity-cart-wrapper">
-                  <QuantitySelector 
-                    onQuantityChange={handleQuantityChange} 
-                    product={currentProduct}
-                  />
-                  <AddToCartButton 
-                    quantity={selectedQuantity} 
-                    product={currentProduct}
-                  />
-                </div>
+                {currentProduct && currentProduct.stock > 0 && (
+                  <div className="quantity-cart-wrapper">
+                    <QuantitySelector 
+                      onQuantityChange={handleQuantityChange} 
+                      product={currentProduct}
+                    />
+                    <AddToCartButton 
+                      quantity={selectedQuantity} 
+                      product={currentProduct}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
