@@ -1,8 +1,11 @@
-import './styles.css';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+
 import { useCart } from '../../context/CartContext';
+import SearchBar from '../Search';
+
+import './styles.css';
 
 export const Header = () => {
   const { getCartItemsCount, clearCart } = useCart();
@@ -69,14 +72,7 @@ export const Header = () => {
             <span>ShopHub</span>
           </button>
           <div className="header-search">
-            <input
-              type="text"
-              className="header-search-input"
-              placeholder="Buscar productos..."
-            />
-            <button className="header-search-btn">
-              🔍
-            </button>
+            <SearchBar />
           </div>
           <div className="nav-links">
             <button 
