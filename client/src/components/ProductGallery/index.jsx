@@ -1,41 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import './styles.css';
-import dbData from '../../../json-server/db.json';
 
-const ProductGallery = () => {
-    const [producto, setProducto] = useState(null);
-    const [mainImage, setMainImage] = useState('');
+const ProductGallery = ({ product }) => {
+    // Estado para la imagen principal
+    const [mainImage, setMainImage] = useState(product?.imagen || '');
 
+    // Actualiza la imagen principal solo cuando cambia el id del producto
     useEffect(() => {
-        // Tomar el primer producto del JSON como ejemplo
-        if (dbData.productos && dbData.productos.length > 0) {
-            const primerProducto = dbData.productos[0];
-            setProducto(primerProducto);
-            setMainImage(primerProducto.imagen);
+        if (product && product.imagen) {
+            setMainImage(product.imagen);
         }
-    }, []);
+    }, [product?.id]);
 
     const handleThumbnailClick = (image) => {
         setMainImage(image);
     };
 
-    if (!producto) {
+    if (!product) {
         return <div className="product-gallery">Cargando galería...</div>;
     }
 
     return (
         <div className="product-gallery">
             <div className="main-image">
-                <img src={mainImage} alt={producto.nombre} />
+                <img src={mainImage} alt={product.nombre} />
             </div>
             <div className="thumbnail-gallery">
-                {producto.imagenes.map((imagen, index) => (
+                {product.imagenes && product.imagenes.map((imagen, index) => (
                     <div 
                         key={index}
                         className={`thumbnail ${mainImage === imagen ? 'active' : ''}`} 
                         onClick={() => handleThumbnailClick(imagen)}
                     >
-                        <img src={imagen} alt={`${producto.nombre} ${index + 1}`} />
+                        <img src={imagen} alt={`${product.nombre} ${index + 1}`} />
                     </div>
                 ))}
             </div>
