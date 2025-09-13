@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import QuantitySelector from '../QuantitySelector';
+import AddToCartButton from '../AddToCartButton';
 import './styles.css';
 
 const ProductInfo = ({ onProductLoaded }) => {
   const [producto, setProducto] = useState(null);
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
   const { id } = useParams();
 
   useEffect(() => {
@@ -49,6 +52,23 @@ const ProductInfo = ({ onProductLoaded }) => {
           ))}
         </ul>
       </div>
+      {/* Renderizado condicional según el stock */}
+      {producto.stock === 0 ? (
+        <button className="sin-stock-btn" disabled>
+          Sin stock
+        </button>
+      ) : (
+        <div className="quantity-cart-wrapper">
+          <QuantitySelector 
+            onQuantityChange={setSelectedQuantity} 
+            product={producto}
+          />
+          <AddToCartButton 
+            quantity={selectedQuantity} 
+            product={producto}
+          />
+        </div>
+      )}
     </div>
   );
 };
