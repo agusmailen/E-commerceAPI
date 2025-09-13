@@ -101,7 +101,7 @@ export default function Register() {
       
       // Auto-login after successful registration
       localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('usuario', JSON.stringify(result.user));
+      localStorage.setItem('usuario', JSON.stringify(response.user));
       
       // Check if there's a pending cart item to add after registration
       const pendingCartItem = localStorage.getItem('pendingCartItem');

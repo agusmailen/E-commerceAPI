@@ -1,28 +1,28 @@
 {
   "usuarios": [
     {
-      "id": 1,
+      "id": "1",
       "email": "admin@shophub.com",
       "password": "admin123",
       "nombre": "Administrador",
       "rol": "admin"
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "usuario@shophub.com",
       "password": "usuario123",
       "nombre": "Usuario Demo",
       "rol": "cliente"
     },
     {
-      "id": 3,
+      "id": "3",
       "email": "juan@shophub.com",
       "password": "juan123",
       "nombre": "Juan Pérez",
       "rol": "cliente"
     },
     {
-      "id": 4,
+      "id": "4",
       "email": "maria@shophub.com",
       "password": "maria123",
       "nombre": "María García",
@@ -36,6 +36,33 @@
       "email": "juaniiii@gmail.com",
       "username": "juani",
       "password": "miprofe_01"
+    },
+    {
+      "id": "1757796140477",
+      "firstName": "Cole",
+      "lastName": "Palmer",
+      "nombre": "Cole Palmer",
+      "email": "iceman@gmail.com",
+      "username": "colepalmer",
+      "password": "zonaoeste_01"
+    },
+    {
+      "id": "1757796308171",
+      "firstName": "Cole",
+      "lastName": "Palmera",
+      "nombre": "Cole Palmera",
+      "email": "colepalmer@gmail.com",
+      "username": "colepalmera",
+      "password": "zonasur_01"
+    },
+    {
+      "id": "1757796894941",
+      "firstName": "Coles",
+      "lastName": "Palmera",
+      "nombre": "Coles Palmera",
+      "email": "colespalmer@gmail.com",
+      "username": "colespalmera",
+      "password": "colespalmeras"
     }
   ],
   "productos": [
