@@ -72,6 +72,15 @@
       "email": "agustina@gmail.com",
       "username": "agustina",
       "password": "agustina123"
+    },
+    {
+      "id": "1757884943690",
+      "firstName": "Ivo",
+      "lastName": "Biscardi",
+      "nombre": "Ivo Biscardi",
+      "email": "ivobiscardi@hotmail.com",
+      "username": "ivobisc",
+      "password": "123456"
     }
   ],
   "productos": [
@@ -81,19 +90,13 @@
       "precio": 189.99,
       "imagen": "https://picsum.photos/id/1059/800/600",
       "imagenes": [
-        "https://picsum.photos/id/1059/800/600",
-        "https://picsum.photos/id/1060/800/600",
-        "https://picsum.photos/id/1061/800/600"
+        "https://picsum.photos/id/1059/800/600"
       ],
       "categoria": "Moda",
       "descripcion": "Lentes de sol clásicos con montura dorada y lentes polarizados",
-      "stock": 15,
-      "detalles": {
-        "material": "Metal",
-        "color": "Dorado",
-        "medidas": "58-14-135",
-        "garantia": "2 años"
-      }
+      "stock": 5,
+      "detalles": {},
+      "estado": "activo"
     },
     {
       "id": "2",
@@ -101,19 +104,13 @@
       "precio": 3899.99,
       "imagen": "https://picsum.photos/id/250/800/600",
       "imagenes": [
-        "https://picsum.photos/id/250/800/600",
-        "https://picsum.photos/id/251/800/600",
-        "https://picsum.photos/id/252/800/600"
+        "https://picsum.photos/id/250/800/600"
       ],
       "categoria": "Fotografía",
       "descripcion": "Cámara mirrorless profesional con sensor full-frame de 45MP",
-      "stock": 0,
-      "detalles": {
-        "sensor": "45MP Full-Frame CMOS",
-        "video": "8K RAW",
-        "estabilizacion": "5 ejes",
-        "conectividad": "Wi-Fi 6, Bluetooth"
-      }
+      "stock": 7,
+      "detalles": {},
+      "estado": "agotado"
     },
     {
       "id": "3",
@@ -161,19 +158,13 @@
       "precio": 129.99,
       "imagen": "https://picsum.photos/id/400/800/600",
       "imagenes": [
-        "https://picsum.photos/id/400/800/600",
-        "https://picsum.photos/id/401/800/600",
-        "https://picsum.photos/id/402/800/600"
+        "https://picsum.photos/id/400/800/600"
       ],
       "categoria": "Deportes",
       "descripcion": "Zapatillas profesionales para running con máxima amortiguación",
-      "stock": 30,
-      "detalles": {
-        "talle": "40-45",
-        "color": "Negro/Rojo",
-        "suela": "EVA expandida",
-        "peso": "280g"
-      }
+      "stock": 2,
+      "detalles": {},
+      "estado": "activo"
     },
     {
       "id": "6",
