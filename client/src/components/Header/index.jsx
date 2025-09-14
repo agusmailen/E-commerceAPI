@@ -12,25 +12,31 @@ export const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  
-  // Check authentication state on component mount and when location changes
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  // Check authentication and admin state on component mount and when location changes
   useEffect(() => {
     const checkAuth = () => {
       const authStatus = localStorage.getItem('isLoggedIn') === 'true';
       setIsAuthenticated(authStatus);
+      // Verifica si el usuario es admin
+      const user = JSON.parse(localStorage?.getItem('usuario'));
+      console.log(user)
+      console.log(isAdmin)
+      setIsAdmin(user?.rol === 'admin');
     };
-    
+
     checkAuth();
-    
+
     // Listen for storage changes (when logout happens in another tab/window)
     const handleStorageChange = (e) => {
-      if (e.key === 'isLoggedIn') {
+      if (e.key === 'isLoggedIn' || e.key === 'usuario') {
         checkAuth();
       }
     };
-    
+
     window.addEventListener('storage', handleStorageChange);
-    
+
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
@@ -83,6 +89,14 @@ export const Header = () => {
             </button>
             {isAuthenticated && (
               <>
+                {isAdmin && (
+                  <button
+                    className={`btn-primary ${isActive('/admin/products') ? 'active' : ''}`}
+                    onClick={() => navigate('/admin/products')}
+                  >
+                    Gestionar Productos
+                  </button>
+                )}
                 <button 
                   className={`cart-button ${isActive('/cart') ? 'active' : ''}`}
                   onClick={() => navigate('/cart')}

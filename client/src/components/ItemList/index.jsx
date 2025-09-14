@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ItemList = ({item}) => {
-  console.log(item);
   const { addToCart } = useCart();
   const navigate = useNavigate();
   const [isAdded, setIsAdded] = useState(false);
