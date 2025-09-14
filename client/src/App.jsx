@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import ProductManagement from './pages/ProductManagement/index.jsx';
 import CartView from './pages/Cart';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminRoute from './components/AdminRoute';
 import { CartProvider } from './context/CartContext';
 
 export const App = () => {
@@ -29,8 +30,10 @@ export const App = () => {
           } />
           <Route path="/admin/products" element={
             <ProtectedRoute>
-              <ProductManagement />
-            </ProtectedRoute>
+              <AdminRoute>
+                <ProductManagement />
+              </AdminRoute>
+              </ProtectedRoute>
           } />
           
           {/* Redirect to login by default */}
