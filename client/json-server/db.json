@@ -72,6 +72,51 @@
       "email": "agustina@gmail.com",
       "username": "agustina",
       "password": "agustina123"
+    },
+    {
+      "id": "1757884493586",
+      "firstName": "agus",
+      "lastName": "marra",
+      "nombre": "agus marra",
+      "email": "agus@hotmail.com",
+      "username": "agus123",
+      "password": "agustina1234"
+    },
+    {
+      "id": "1757884681424",
+      "firstName": "agustina",
+      "lastName": "marrapodi",
+      "nombre": "agustina marrapodi",
+      "email": "marrapodiagustina@gmail.com",
+      "username": "agus",
+      "password": "123456"
+    },
+    {
+      "id": "1757884743297",
+      "firstName": "agustina",
+      "lastName": "marrapodi",
+      "nombre": "agustina marrapodi",
+      "email": "agustina1234@gmail.com",
+      "username": "agustinamarrapodi",
+      "password": "123456"
+    },
+    {
+      "id": "1757884805840",
+      "firstName": "agustina",
+      "lastName": "marrapodi",
+      "nombre": "agustina marrapodi",
+      "email": "aaaaa@gmail.com",
+      "username": "aaaaa",
+      "password": "123456"
+    },
+    {
+      "id": "1757884912039",
+      "firstName": "agustina",
+      "lastName": "marrapodi",
+      "nombre": "agustina marrapodi",
+      "email": "aaaa@gmail.com",
+      "username": "aaaaaa",
+      "password": "123456"
     }
   ],
   "productos": [
