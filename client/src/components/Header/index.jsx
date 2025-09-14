@@ -19,10 +19,7 @@ export const Header = () => {
     const checkAuth = () => {
       const authStatus = localStorage.getItem('isLoggedIn') === 'true';
       setIsAuthenticated(authStatus);
-      // Verifica si el usuario es admin
       const user = JSON.parse(localStorage?.getItem('usuario'));
-      console.log(user)
-      console.log(isAdmin)
       setIsAdmin(user?.rol === 'admin');
     };
 
