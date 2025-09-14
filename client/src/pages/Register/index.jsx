@@ -75,7 +75,8 @@ export default function Register() {
       lastName: lastName.trim(),
       email: email.trim().toLowerCase(),
       username: username.trim(),
-      password: password
+      password: password,
+      rol: 'user' // Rol por defecto
     };
 
     try {
@@ -101,7 +102,7 @@ export default function Register() {
       
       // Auto-login after successful registration
       localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('usuario', JSON.stringify(response.user));
+      localStorage.setItem('usuario', JSON.stringify(response.data));
       
       // Check if there's a pending cart item to add after registration
       const pendingCartItem = localStorage.getItem('pendingCartItem');
