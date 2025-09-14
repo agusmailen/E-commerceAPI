@@ -14,21 +14,33 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product, quantity = 1) => {
+    if (quantity > product.stock) {
+      alert(`Solo hay ${product.stock} unidades disponibles`);
+      return false;
+    }
+
     setCartItems(prevItems => {
       const existingItem = prevItems.find(item => item.id === product.id);
       
       if (existingItem) {
-        // If item already exists, update quantity
+        // Verificar que la nueva cantidad no exceda el stock
+        const newQuantity = existingItem.quantity + quantity;
+        if (newQuantity > product.stock) {
+          alert(`Solo hay ${product.stock} unidades disponibles`);
+          return prevItems;
+        }
+        // Si hay stock suficiente, actualizar cantidad
         return prevItems.map(item =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
+            ? { ...item, quantity: newQuantity }
             : item
         );
       } else {
-        // Add new item to cart
+        // Agregar nuevo item
         return [...prevItems, { ...product, quantity }];
       }
     });
+    return true;
   };
 
   const removeFromCart = (productId) => {
@@ -36,18 +48,26 @@ export const CartProvider = ({ children }) => {
   };
 
   const updateQuantity = (productId, newQuantity) => {
-    if (newQuantity <= 0) {
-      removeFromCart(productId);
-      return;
-    }
-    
-    setCartItems(prevItems =>
-      prevItems.map(item =>
+    setCartItems(prevItems => {
+      const item = prevItems.find(item => item.id === productId);
+      if (!item) return prevItems;
+
+      // Validar que la nueva cantidad no exceda el stock
+      if (newQuantity > item.stock) {
+        alert(`Solo hay ${item.stock} unidades disponibles`);
+        return prevItems;
+      }
+
+      if (newQuantity <= 0) {
+        return prevItems.filter(item => item.id !== productId);
+      }
+      
+      return prevItems.map(item =>
         item.id === productId
           ? { ...item, quantity: newQuantity }
           : item
-      )
-    );
+      );
+    });
   };
 
   const clearCart = () => {
