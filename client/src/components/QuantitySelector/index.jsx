@@ -6,28 +6,32 @@ const QuantitySelector = ({ onQuantityChange, product }) => {
     const [stock, setStock] = useState(0);
 
     useEffect(() => {
-        // Use product prop to get stock
         if (product) {
             setStock(product.stock || 0);
+            // Asegurar que la cantidad inicial no exceda el stock
+            if (quantity > product.stock) {
+                setQuantity(product.stock);
+            }
         }
     }, [product]);
 
-    useEffect(() => {
-        // Notify parent component of quantity changes
-        if (onQuantityChange) {
-            onQuantityChange(quantity);
-        }
-    }, [quantity, onQuantityChange]);
-
     const decreaseQuantity = () => {
         if (quantity > 1) {
-            setQuantity(quantity - 1);
+            const newQuantity = quantity - 1;
+            setQuantity(newQuantity);
+            if (onQuantityChange) {
+                onQuantityChange(newQuantity);
+            }
         }
     };
 
     const increaseQuantity = () => {
         if (quantity < stock) {
-            setQuantity(quantity + 1);
+            const newQuantity = quantity + 1;
+            setQuantity(newQuantity);
+            if (onQuantityChange) {
+                onQuantityChange(newQuantity);
+            }
         }
     };
 
@@ -48,6 +52,7 @@ const QuantitySelector = ({ onQuantityChange, product }) => {
             >
                 +
             </button>
+            <span className="stock-info">Stock: {stock}</span>
         </div>
     );
 };
