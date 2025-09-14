@@ -63,6 +63,15 @@
       "email": "colespalmer@gmail.com",
       "username": "colespalmera",
       "password": "colespalmeras"
+    },
+    {
+      "id": "1757882281208",
+      "firstName": "agustina",
+      "lastName": "marrapodi",
+      "nombre": "agustina marrapodi",
+      "email": "agustina@gmail.com",
+      "username": "agustina",
+      "password": "agustina123"
     }
   ],
   "productos": [
