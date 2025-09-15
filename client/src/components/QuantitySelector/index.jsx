@@ -52,7 +52,7 @@ const QuantitySelector = ({ onQuantityChange, product }) => {
             >
                 +
             </button>
-            <span className="stock-info">Stock: {stock}</span>
+          
         </div>
     );
 };
