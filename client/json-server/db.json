@@ -144,7 +144,7 @@
       ],
       "categoria": "Tecnología",
       "descripcion": "Reloj inteligente con monitoreo avanzado de salud",
-      "stock": 0,
+      "stock": 110,
       "detalles": {
         "pantalla": "1.4 pulgadas AMOLED",
         "bateria": "361mAh",
@@ -162,7 +162,7 @@
       ],
       "categoria": "Deportes",
       "descripcion": "Zapatillas profesionales para running con máxima amortiguación",
-      "stock": 0,
+      "stock": 2,
       "detalles": {},
       "estado": "activo"
     },
@@ -178,7 +178,7 @@
       ],
       "categoria": "Tecnología",
       "descripcion": "Laptop gaming con RTX 4060 y procesador Intel i9",
-      "stock": 12,
+      "stock": 10,
       "detalles": {
         "procesador": "Intel i9 13900H",
         "gpu": "RTX 4060 8GB",
@@ -218,7 +218,7 @@
       ],
       "categoria": "Fotografía",
       "descripcion": "Drone con cámara 4K y sensor de 1 pulgada",
-      "stock": 10,
+      "stock": 7,
       "detalles": {
         "camara": "20MP 4K/60fps",
         "autonomia": "31 minutos",
@@ -238,7 +238,7 @@
       ],
       "categoria": "Deportes",
       "descripcion": "Bicicleta de montaña con cuadro de aluminio y 21 velocidades",
-      "stock": 8,
+      "stock": 9,
       "detalles": {
         "marco": "Aluminio 6061",
         "velocidades": "21",
@@ -258,7 +258,7 @@
       ],
       "categoria": "Tecnología",
       "descripcion": "Auriculares premium con cancelación de ruido",
-      "stock": 22,
+      "stock": 10,
       "detalles": {
         "bateria": "30 horas",
         "conectividad": "Bluetooth 5.2",
@@ -278,7 +278,7 @@
       ],
       "categoria": "Fotografía",
       "descripcion": "Mochila profesional para equipo fotográfico",
-      "stock": 15,
+      "stock": 14,
       "detalles": {
         "capacidad": "25L",
         "material": "Nylon balístico",
