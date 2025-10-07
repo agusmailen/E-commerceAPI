@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import Header from '../../components/Header';
@@ -15,6 +15,8 @@ const CartView = () => {
     clearCart
   } = useCart();
 
+
+  const [successBanner, setSuccessBanner] = useState(false);
   const shippingCost = 15.99;
   const subtotal = getCartTotal();
   const total = subtotal + shippingCost;
@@ -32,16 +34,32 @@ const CartView = () => {
       <>
         <Header />
         <div className="cart-view-container">
-          <div className="empty-cart-view">
-            <h2>Tu carrito está vacío</h2>
-            <p>¡Agrega algunos productos para comenzar!</p>
-            <button 
-              className="continue-shopping-btn-view"
-              onClick={() => navigate('/products')}
-            >
-              Continuar Comprando
-            </button>
-          </div>
+          {successBanner ? (
+            <div className="cart-success-banner" style={{
+              background: '#e0ffe0',
+              color: '#155724',
+              padding: '16px',
+              borderRadius: '8px',
+              marginBottom: '20px',
+              textAlign: 'center',
+              fontWeight: 'bold',
+              fontSize: '1.2rem',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
+            }}>
+              ¡Gracias por tu compra!
+            </div>
+          ) : (
+            <div className="empty-cart-view">
+              <h2>Tu carrito está vacío</h2>
+              <p>¡Agrega algunos productos para comenzar!</p>
+              <button 
+                className="continue-shopping-btn-view"
+                onClick={() => navigate('/products')}
+              >
+                Continuar Comprando
+              </button>
+            </div>
+          )}
         </div>
       </>
     );
@@ -51,7 +69,7 @@ const CartView = () => {
     // Verificar que todos los productos tengan stock suficiente
     const invalidItems = cartItems.filter(item => item.quantity > item.stock);
     if (invalidItems.length > 0) {
-      alert('Algunos productos no tienen stock suficiente. Por favor revisa tu carrito.');
+      // Puedes mostrar un banner de error si lo deseas
       return;
     }
 
@@ -73,13 +91,16 @@ const CartView = () => {
         }
       }
 
-      // Si todo salió bien, limpiar el carrito y mostrar mensaje de éxito
+      // Si todo salió bien, limpiar el carrito y mostrar banner de éxito
       clearCart();
-      alert('¡Compra realizada con éxito!');
-      navigate('/products');
+      setSuccessBanner(true);
+      setTimeout(() => {
+        setSuccessBanner(false);
+        navigate('/products');
+      }, 3000);
     } catch (error) {
       console.error('Error al procesar la compra:', error);
-      alert('Hubo un error al procesar tu compra. Por favor, intenta nuevamente.');
+      // Puedes mostrar un banner de error si lo deseas
     }
   };
 
@@ -87,6 +108,21 @@ const CartView = () => {
     <>
       <Header />
       <div className="cart-view-container">
+        {successBanner && (
+          <div className="cart-success-banner" style={{
+            background: '#e0ffe0',
+            color: '#155724',
+            padding: '16px',
+            borderRadius: '8px',
+            marginBottom: '20px',
+            textAlign: 'center',
+            fontWeight: 'bold',
+            fontSize: '1.2rem',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
+          }}>
+            ¡Gracias por tu compra!
+          </div>
+        )}
         <h1 className="cart-view-title">Carrito de Compras</h1>
       
         <div className="cart-view-content">

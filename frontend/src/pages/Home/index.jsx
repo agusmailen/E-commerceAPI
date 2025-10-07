@@ -16,22 +16,37 @@ export default function Home() {
     navigate('/products');
   };
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/productos");
-        if (!res.ok) throw new Error("Error al obtener productos");
-        const productos = await res.json();
-        // Selecciona los primeros 4 productos con stock > 0 como destacados
-        const destacados = productos.filter(p => p.stock > 0).slice(0, 4);
-        setFeaturedProducts(destacados);
-      } catch (err) {
-        console.error('Error fetching products:', err);
-        setFeaturedProducts([]);
-      }
-    };
-    fetchProducts();
-  }, []);
+useEffect(() => {
+  // 1. Se define una función async (porque dentro hay await)
+  const fetchProducts = async () => {
+    try {
+      // 2. Llama a la API
+      const res = await fetch("http://localhost:3000/productos");
+
+      // 3. Verifica que la respuesta sea correcta
+      if (!res.ok) throw new Error("Error al obtener productos");
+
+      // 4. Convierte la respuesta en JSON
+      const productos = await res.json();
+
+      // 5. Filtra solo productos con stock > 0
+      //    y toma los primeros 4
+      const destacados = productos.filter(p => p.stock > 0).slice(0, 5
+      );
+
+      // 6. Guarda esos destacados en el estado local
+      setFeaturedProducts(destacados);
+
+    } catch (err) {
+      // 7. Si algo falla, muestra el error y limpia los destacados
+      console.error('Error fetching products:', err);
+      setFeaturedProducts([]);
+    }
+  };
+
+  // 8. Ejecuta la función
+  fetchProducts();
+}, []); // [] => solo se ejecuta 1 vez al montar
 
   return (
     <>
