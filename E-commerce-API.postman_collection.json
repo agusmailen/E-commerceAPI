@@ -1,0 +1,157 @@
+{
+  "info": {
+    "name": "E-commerce API",
+    "description": "Collection para testear la API del e-commerce",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/api"
+    }
+  ],
+  "item": [
+    {
+      "name": "Usuarios",
+      "item": [
+        {
+          "name": "Listar Usuarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/usuarios",
+              "host": ["{{baseUrl}}"],
+              "path": ["usuarios"]
+            }
+          }
+        },
+        {
+          "name": "Registrar Usuario",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Test\",\n  \"lastName\": \"User\",\n  \"email\": \"test@example.com\",\n  \"username\": \"testuser\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/usuarios",
+              "host": ["{{baseUrl}}"],
+              "path": ["usuarios"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@shophub.com\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["usuarios", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Productos",
+      "item": [
+        {
+          "name": "Listar Productos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/productos",
+              "host": ["{{baseUrl}}"],
+              "path": ["productos"]
+            }
+          }
+        },
+        {
+          "name": "Obtener Producto por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/productos/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["productos", "1"]
+            }
+          }
+        },
+        {
+          "name": "Crear Producto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"iPhone 15 Pro\",\n  \"descripcion\": \"Smartphone Apple con chip A17 Pro\",\n  \"precio\": 999.99,\n  \"categoria\": \"Tecnología\",\n  \"stock\": 25,\n  \"imagen\": \"https://picsum.photos/800/600\",\n  \"imagenes\": [\n    \"https://picsum.photos/800/600\",\n    \"https://picsum.photos/801/600\"\n  ],\n  \"estado\": \"activo\",\n  \"detalles\": {\n    \"color\": \"Titanio Natural\",\n    \"almacenamiento\": \"256GB\",\n    \"pantalla\": \"6.1 pulgadas\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/productos",
+              "host": ["{{baseUrl}}"],
+              "path": ["productos"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar Producto",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"iPhone 15 Pro Max\",\n  \"descripcion\": \"Smartphone Apple con chip A17 Pro - Actualizado\",\n  \"precio\": 1199.99,\n  \"categoria\": \"Tecnología\",\n  \"stock\": 15,\n  \"imagen\": \"https://picsum.photos/800/600\",\n  \"imagenes\": [\n    \"https://picsum.photos/800/600\"\n  ],\n  \"estado\": \"activo\",\n  \"detalles\": {\n    \"color\": \"Titanio Azul\",\n    \"almacenamiento\": \"512GB\",\n    \"pantalla\": \"6.7 pulgadas\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/productos/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["productos", "1"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar Producto",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/productos/13",
+              "host": ["{{baseUrl}}"],
+              "path": ["productos", "13"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
