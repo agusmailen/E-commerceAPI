@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,6 +73,11 @@ public class PedidoService {
 
     public List<PedidoDTO> obtenerPedidosPorUsuario(Long usuarioId) {
         List<Pedido> pedidos = pedidoRepository.findByUsuarioId(usuarioId);
+        return pedidos.stream().map(PedidoDTO::new).toList();
+    }
+
+    public List<PedidoDTO> obtenerTodosLosPedidos() {
+        List<Pedido> pedidos = pedidoRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
         return pedidos.stream().map(PedidoDTO::new).toList();
     }
 }
