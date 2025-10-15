@@ -18,7 +18,6 @@ public class PedidoDTO {
     private List<PedidoItemDTO> items = new ArrayList<>();
 
     private BigDecimal total;
-    private String estado;
     private LocalDateTime createdAt;
 
     public PedidoDTO() {}
@@ -26,8 +25,7 @@ public class PedidoDTO {
     public PedidoDTO(Pedido pedido) {
         this.id = pedido.getId();
         this.usuarioId = pedido.getUsuario() != null ? pedido.getUsuario().getId() : null;
-        this.total = pedido.getTotal();
-        this.estado = pedido.getEstado().getValue();
+    this.total = pedido.getTotal();
         this.createdAt = pedido.getCreatedAt();
         pedido.getItems().forEach(i -> this.items.add(new PedidoItemDTO(i)));
     }
@@ -44,9 +42,6 @@ public class PedidoDTO {
 
     public BigDecimal getTotal() { return total; }
     public void setTotal(BigDecimal total) { this.total = total; }
-
-    public String getEstado() { return estado; }
-    public void setEstado(String estado) { this.estado = estado; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
