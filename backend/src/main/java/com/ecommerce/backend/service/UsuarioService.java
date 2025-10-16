@@ -2,6 +2,7 @@ package com.ecommerce.backend.service;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,7 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final AuthenticationManager authenticationManager;
+    private final PasswordEncoder passwordEncoder;
 
     public List<UsuarioDTO> obtenerTodosLosUsuarios() {
         return usuarioRepository.findAll()
@@ -48,7 +50,7 @@ public class UsuarioService {
         // Crear nuevo usuario
         Usuario usuario = new Usuario();
         usuario.setEmail(registroDTO.getEmail());
-        usuario.setPassword(registroDTO.getPassword());
+        usuario.setPassword(passwordEncoder.encode(registroDTO.getPassword()));
         usuario.setFirstName(registroDTO.getFirstName());
         usuario.setLastName(registroDTO.getLastName());
         usuario.setNombre(registroDTO.getFirstName() + " " + registroDTO.getLastName());
