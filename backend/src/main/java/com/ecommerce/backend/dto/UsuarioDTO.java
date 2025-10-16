@@ -17,7 +17,7 @@ public class UsuarioDTO {
     
     private String firstName;
     private String lastName;
-    private String username;
+    private String user;
     private String rol;
     
     // Constructors
@@ -29,7 +29,7 @@ public class UsuarioDTO {
         this.nombre = usuario.getNombre();
         this.firstName = usuario.getFirstName();
         this.lastName = usuario.getLastName();
-        this.username = usuario.getUsername();
+    this.user = usuario.getUser();
         this.rol = usuario.getRol().getValue();
     }
     
@@ -49,8 +49,8 @@ public class UsuarioDTO {
     public String getLastName() { return lastName; }
     public void setLastName(String lastName) { this.lastName = lastName; }
     
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
+    public String getUser() { return user; }
+    public void setUser(String user) { this.user = user; }
     
     public String getRol() { return rol; }
     public void setRol(String rol) { this.rol = rol; }

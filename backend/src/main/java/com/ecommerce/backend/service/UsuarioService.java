@@ -36,9 +36,9 @@ public class UsuarioService {
             throw new EmailAlreadyExistsException(registroDTO.getEmail());
         }
         
-        // Verificar si el username ya existe
-        if (usuarioRepository.existsByUsername(registroDTO.getUsername())) {
-            throw new BadRequestException("El username ya está en uso");
+        // Verificar si el user ya existe
+        if (usuarioRepository.existsByUser(registroDTO.getUser())) {
+            throw new BadRequestException("El user ya está en uso");
         }
         
         // Crear nuevo usuario
@@ -48,7 +48,7 @@ public class UsuarioService {
         usuario.setFirstName(registroDTO.getFirstName());
         usuario.setLastName(registroDTO.getLastName());
         usuario.setNombre(registroDTO.getFirstName() + " " + registroDTO.getLastName());
-        usuario.setUsername(registroDTO.getUsername());
+    usuario.setUser(registroDTO.getUser());
         usuario.setRol(Usuario.Rol.CLIENTE);
         
         Usuario usuarioGuardado = usuarioRepository.save(usuario);

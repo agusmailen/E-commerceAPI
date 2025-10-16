@@ -43,7 +43,7 @@ public class DataInitializer implements CommandLineRunner {
         admin.setNombre("Administrador");
         admin.setFirstName("Admin");
         admin.setLastName("Sistema");
-        admin.setUsername("admin");
+    admin.setUser("admin");
         admin.setRol(Usuario.Rol.ADMIN);
 
         Usuario usuario = new Usuario();
@@ -52,7 +52,7 @@ public class DataInitializer implements CommandLineRunner {
         usuario.setNombre("Usuario Demo");
         usuario.setFirstName("Usuario");
         usuario.setLastName("Demo");
-        usuario.setUsername("usuario");
+    usuario.setUser("usuario");
         usuario.setRol(Usuario.Rol.CLIENTE);
 
         Usuario juan = new Usuario();
@@ -61,7 +61,7 @@ public class DataInitializer implements CommandLineRunner {
         juan.setNombre("Juan Pérez");
         juan.setFirstName("Juan");
         juan.setLastName("Pérez");
-        juan.setUsername("juan");
+    juan.setUser("juan");
         juan.setRol(Usuario.Rol.CLIENTE);
 
         Usuario maria = new Usuario();
@@ -70,7 +70,7 @@ public class DataInitializer implements CommandLineRunner {
         maria.setNombre("María García");
         maria.setFirstName("María");
         maria.setLastName("García");
-        maria.setUsername("maria");
+    maria.setUser("maria");
         maria.setRol(Usuario.Rol.CLIENTE);
 
         usuarioRepository.saveAll(Arrays.asList(admin, usuario, juan, maria));

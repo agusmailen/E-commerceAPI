@@ -1,5 +1,12 @@
 package com.ecommerce.backend.entity;
 
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -7,7 +14,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuario {
+public class Usuario implements UserDetails {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,8 +40,8 @@ public class Usuario {
     @Column(name = "last_name")
     private String lastName;
     
-    @Column(unique = true)
-    private String username;
+    @Column(name = "user_name", unique = true)
+    private String user;
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -114,12 +121,12 @@ public class Usuario {
         this.lastName = lastName;
     }
     
-    public String getUsername() {
-        return username;
+    public String getUser() {
+        return user;
     }
     
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUser(String user) {
+        this.user = user;
     }
     
     public Rol getRol() {
@@ -128,5 +135,17 @@ public class Usuario {
     
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // resultado ROLE_USER o ROLE_ADMIN
+        return List.of(new SimpleGrantedAuthority("ROLE_" + (rol != null ? rol.name() : "USER")));
+    }
+
+    // Implementación de UserDetails: getUsername() debe devolver el email
+    @Override
+    public String getUsername() {
+        return email;
     }
 }
