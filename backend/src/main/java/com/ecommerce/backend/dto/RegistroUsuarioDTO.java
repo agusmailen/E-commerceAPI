@@ -20,8 +20,8 @@ public class RegistroUsuarioDTO {
     @NotBlank(message = "El apellido es obligatorio")
     private String lastName;
     
-    @NotBlank(message = "El username es obligatorio")
-    private String username;
+    @NotBlank(message = "El user es obligatorio")
+    private String user;
     
     // Constructors
     public RegistroUsuarioDTO() {}
@@ -39,6 +39,6 @@ public class RegistroUsuarioDTO {
     public String getLastName() { return lastName; }
     public void setLastName(String lastName) { this.lastName = lastName; }
     
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
+    public String getUser() { return user; }
+    public void setUser(String user) { this.user = user; }
 }
