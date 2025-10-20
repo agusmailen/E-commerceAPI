@@ -1,13 +1,14 @@
 # Backend - E-commerce API
 
-API REST desarrollada con Spring Boot y Java 17 para reemplazar el json-server del frontend.
+API REST desarrollada con Spring Boot y Java 21 para proporcionar servicios de e-commerce.
 
 ## Características
 
-- **Spring Boot 3.3.0** con Java 17
-- **Base de datos H2** en memoria para testing
-- **JPA/Hibernate** para persistencia
-- **Validación** con Bean Validation
+- **Spring Boot 3.3.0** con Java 21
+- **PostgreSQL** en Docker para persistencia
+- **JPA/Hibernate** para ORM
+- **Spring Security** para autenticación y autorización
+- **Bean Validation** para validaciones
 - **CORS** configurado para el frontend
 
 ## Estructura del Proyecto
@@ -40,34 +41,114 @@ src/
 - `PUT /{id}` - Actualizar producto
 - `DELETE /{id}` - Eliminar producto
 
+## Requisitos Previos
+
+- **Java 21** o superior
+- **Maven 3.6+** (o usar el wrapper incluido `./mvnw`)
+- **Docker** y **Docker Compose**
+- **PostgreSQL** corriendo en Docker (ver instrucciones abajo)
+
 ## Cómo ejecutar
 
-1. **Compilar el proyecto:**
+1. **Iniciar PostgreSQL con Docker:**
+   
+   Desde la raíz del proyecto:
+   ```bash
+   cd ..
+   docker-compose up -d
+   ```
+
+2. **Verificar que PostgreSQL esté corriendo:**
+   ```bash
+   docker-compose ps
+   ```
+
+3. **Compilar el proyecto:**
    ```bash
    cd backend
-   mvn clean compile
+   ./mvnw clean compile
    ```
 
-2. **Ejecutar la aplicación:**
+4. **Ejecutar la aplicación:**
    ```bash
-   mvn spring-boot:run
+   ./mvnw spring-boot:run
    ```
 
-3. **Acceder a la API:**
+5. **Acceder a la API:**
    - Base URL: `http://localhost:8080/api`
-   - H2 Console: `http://localhost:8080/api/h2-console`
+   - Swagger/Docs: (si está configurado) `http://localhost:8080/api/swagger-ui.html`
 
-## Configuración H2
+## Configuración de Base de Datos
 
-- URL: `jdbc:h2:mem:ecommerce`
-- Usuario: `sa` (sin contraseña)
+### PostgreSQL (Docker)
+
+- **Host**: `localhost`
+- **Puerto**: `5432`
+- **Base de datos**: `ecommerce`
+- **Usuario**: `ecommerce_user`
+- **Contraseña**: `ecommerce_pass`
+
+### Acceder a PostgreSQL
+
+```bash
+docker exec -it ecommerce-postgres psql -U ecommerce_user -d ecommerce
+```
+
+Comandos útiles en psql:
+- `\dt` - Listar tablas
+- `\d nombre_tabla` - Ver estructura de tabla
+- `\q` - Salir
 
 ## Datos de Prueba
 
+La aplicación inicializa automáticamente con datos de prueba (ver `DataInitializer.java`).
+
 ### Usuarios:
-- **Admin**: `admin@shophub.com` / `admin123`
-- **Usuario**: `usuario@shophub.com` / `usuario123`
+- **Admin**: `admin@shophub.com` / `admin123` (Rol: ADMIN)
+- **Usuario**: `usuario@shophub.com` / `usuario123` (Rol: CLIENTE)
+- **Juan**: `juan@shophub.com` / `juan123` (Rol: CLIENTE)
+- **María**: `maria@shophub.com` / `maria123` (Rol: CLIENTE)
 
 ### Productos:
-- 12 productos con diferentes categorías
+- 12 productos en diferentes categorías:
+  - Tecnología (Laptop, Smartwatch, Auriculares)
+  - Deportes (Zapatillas, Guantes, Raqueta, Bicicleta, Pelota)
+  - Fotografía (Cámara, Drone, Mochila)
+  - Accesorios (Termo)
 - Stock y estados variados para testing
+
+## Detener la Base de Datos
+
+Para detener PostgreSQL:
+```bash
+docker-compose stop
+```
+
+Para eliminar todo (incluyendo datos):
+```bash
+docker-compose down -v
+```
+
+## Arquitectura
+
+```
+backend/
+├── config/          # Configuración (Security, DataInitializer)
+├── controller/      # Controladores REST
+├── service/         # Lógica de negocio
+├── repository/      # Repositorios JPA
+├── entity/          # Entidades (Usuario, Producto, Pedido)
+├── dto/             # Data Transfer Objects
+└── exception/       # Manejo de excepciones
+```
+
+## Tecnologías Utilizadas
+
+- Spring Boot 3.3.0
+- Spring Data JPA
+- Spring Security
+- PostgreSQL
+- Hibernate
+- Bean Validation
+- Lombok (opcional)
+- Maven
