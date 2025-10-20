@@ -28,15 +28,30 @@ E-commerceAPI/
 - **Material-UI** para componentes
 
 ### Backend
-- **Spring Boot 3.3.0** con Java 17
+- **Spring Boot 3.3.0** con Java 21
 - **Spring Data JPA** para persistencia
-- **H2 Database** en memoria
+- **PostgreSQL** en Docker para base de datos
 - **Maven** para gestión de dependencias
 - **Bean Validation** para validaciones
+- **Spring Security** para autenticación
 
 ## Cómo ejecutar el proyecto completo
 
-### 1. Ejecutar el Backend
+### 1. Iniciar la Base de Datos (PostgreSQL en Docker)
+
+Desde la raíz del proyecto:
+
+```bash
+docker-compose up -d
+```
+
+Verifica que el contenedor esté corriendo:
+
+```bash
+docker-compose ps
+```
+
+### 2. Ejecutar el Backend
 
 ```bash
 cd backend
@@ -45,7 +60,7 @@ cd backend
 
 El backend estará disponible en: `http://localhost:8080/api`
 
-### 2. Ejecutar el Frontend
+### 3. Ejecutar el Frontend
 
 ```bash
 cd frontend
@@ -87,16 +102,28 @@ El frontend estará disponible en: `http://localhost:5173`
 
 ## Base de Datos
 
-El backend usa H2 en memoria con datos de prueba pre-cargados:
+El backend usa **PostgreSQL** corriendo en Docker con datos de prueba pre-cargados.
 
 ### Usuarios de prueba:
 - **Admin**: `admin@shophub.com` / `admin123`
 - **Usuario**: `usuario@shophub.com` / `usuario123`
+- **Juan**: `juan@shophub.com` / `juan123`
+- **María**: `maria@shophub.com` / `maria123`
 
-### Consola H2:
-- URL: `http://localhost:8080/api/h2-console`
-- JDBC URL: `jdbc:h2:mem:ecommerce`
-- Usuario: `sa` (sin contraseña)
+### Acceso a PostgreSQL:
+
+**Desde línea de comandos:**
+```bash
+docker exec -it ecommerce-postgres psql -U ecommerce_user -d ecommerce
+```
+
+**Configuración:**
+- Base de datos: `ecommerce`
+- Usuario: `ecommerce_user`
+- Contraseña: `ecommerce_pass`
+- Puerto: `5432`
+
+📖 **Para más detalles sobre Docker y la base de datos, ver [DOCKER_SETUP.md](DOCKER_SETUP.md)**
 
 ## Migración del json-server
 
@@ -118,8 +145,16 @@ Para contribuir al proyecto:
 4. Probar tanto frontend como backend
 5. Enviar pull request
 
+## Requisitos Previos
+
+- **Java 21** o superior
+- **Node.js 18** o superior
+- **Docker** y **Docker Compose**
+- **Maven** (o usar el wrapper incluido `mvnw`)
+
 ## Notas
 
-- El frontend está configurado para usar tanto `localhost:3000` (json-server) como `localhost:8080/api` (Spring Boot)
+- El frontend está configurado para usar `localhost:8080/api` (Spring Boot)
 - CORS está configurado para permitir el desarrollo local
-- Los datos se reinician cada vez que se ejecuta el backend (H2 en memoria)
+- Los datos persisten en PostgreSQL (no se pierden al reiniciar)
+- Para eliminar todos los datos: `docker-compose down -v`
