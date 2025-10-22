@@ -11,18 +11,12 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import jakarta.annotation.PostConstruct;
-
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 
 @Configuration
 public class JwtConfig {
-
-    private static final Logger log = LoggerFactory.getLogger(JwtConfig.class);
 
     @Value("${jwt.secret}")
     private String jwtSecret;
