@@ -33,6 +33,14 @@ const ProductManagement = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  const getAuthHeaders = (extra = {}) => {
+    const token = localStorage.getItem('authToken');
+    return {
+      ...(extra || {}),
+      ...(token ? { Authorization: `Bearer ${token}` } : {})
+    };
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!canSubmit) return;
@@ -49,11 +57,11 @@ const ProductManagement = () => {
         estado: form.estado || 'activo',
         detalles: {}
       };
-      const base = await resolveApiBase();
+      const base = API_BASE;
       if (editingId) {
-        await fetch(`${base}/productos/${editingId}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        await fetch(`${base}/productos/${editingId}`, { method: 'PATCH', headers: getAuthHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify(body) });
       } else {
-        const res = await fetch(`${base}/productos`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        const res = await fetch(`${base}/productos`, { method: 'POST', headers: getAuthHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify(body) });
         if (!res.ok) throw new Error('No se pudo crear el producto');
       }
       setForm({ nombre: '', descripcion: '', precio: '', categoria: '', imagen: '', stock: '', estado: 'activo' });
@@ -68,16 +76,16 @@ const ProductManagement = () => {
 
   const handleDelete = async (id) => {
     try {
-      const base = await resolveApiBase();
-      await fetch(`${base}/productos/${id}`, { method: 'DELETE' });
+      const base = API_BASE;
+      await fetch(`${base}/productos/${id}`, { method: 'DELETE', headers: getAuthHeaders() });
       await loadProductos();
     } catch (e) { console.error(e); }
   };
 
   const handleEstadoChange = async (id, estado) => {
     try {
-      const base = await resolveApiBase();
-      await fetch(`${base}/productos/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ estado }) });
+      const base = API_BASE;
+      await fetch(`${base}/productos/${id}`, { method: 'PATCH', headers: getAuthHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify({ estado }) });
       setProductos((prev) => prev.map((p) => (p.id === id ? { ...p, estado } : p)));
     } catch (e) { console.error(e); }
   };

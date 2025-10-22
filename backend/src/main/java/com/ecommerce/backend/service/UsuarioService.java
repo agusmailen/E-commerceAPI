@@ -13,6 +13,7 @@ import com.ecommerce.backend.dto.UsuarioDTO;
 import com.ecommerce.backend.entity.Usuario;
 import com.ecommerce.backend.exception.BadRequestException;
 import com.ecommerce.backend.exception.EmailAlreadyExistsException;
+import com.ecommerce.backend.exception.ResourceNotFoundException;
 import com.ecommerce.backend.repository.UsuarioRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     public List<UsuarioDTO> obtenerTodosLosUsuarios() {
         return usuarioRepository.findAll()
@@ -61,16 +63,18 @@ public class UsuarioService {
         return new UsuarioDTO(usuarioGuardado);
     }
 
-    public UsuarioDTO autenticarUsuario(LoginDTO loginDTO) {
-        authenticationManager.authenticate(
+    public String autenticarYGenerarToken(LoginDTO loginDTO) {
+        var authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginDTO.getEmail(),
                         loginDTO.getPassword()
                 ));
+        return jwtService.generateToken(authentication);
+    }
 
-       Usuario usuario = usuarioRepository.findByEmail(loginDTO.getEmail())
-            .orElseThrow(() -> new BadRequestException("Usuario no encontrado"));
-
+    public UsuarioDTO obtenerPorEmail(String email) {
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario", "email", email));
         return new UsuarioDTO(usuario);
     }
 }

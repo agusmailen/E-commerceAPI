@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.config.Customizer;
 
 import com.ecommerce.backend.repository.UsuarioRepository;
 
@@ -43,14 +45,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/productos").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/usuarios/login").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/usuarios").permitAll()
-
-
-                        .anyRequest().authenticated());
+            .csrf(csrf -> csrf.disable())
+            .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(auth -> auth
+                // Public endpoints
+                .requestMatchers(HttpMethod.POST, "/usuarios", "/usuarios/login").permitAll()
+                .requestMatchers(HttpMethod.GET, "/productos", "/productos/*").permitAll()
+                // Everything else requires auth
+                .anyRequest().authenticated()
+            )
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
 
         return http.build();
     }

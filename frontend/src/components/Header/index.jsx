@@ -24,6 +24,7 @@ export const Header = () => {
       try {
         user = userStr && userStr !== 'undefined' ? JSON.parse(userStr) : null;
       } catch (e) {
+        console.warn('Error parsing usuario from storage:', e);
         user = null;
       }
       setIsAdmin(user?.rol === 'admin');
@@ -49,6 +50,7 @@ export const Header = () => {
     // Clear localStorage
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('usuario');
+    localStorage.removeItem('authToken');
     
     // Clear sessionStorage (in case it's used elsewhere)
     sessionStorage.removeItem('isLoggedIn');

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import './styles.css';
@@ -81,8 +81,9 @@ const Login = () => {
       });
       
       if (response.ok) {
-        const usuario = await response.json();
-        return usuario;
+        const data = await response.json();
+        // Expecting { token, usuario }
+        return data;
       } else {
         return null;
       }
@@ -103,19 +104,20 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const usuario = await authenticateUser(formData.email, formData.password);
+      const auth = await authenticateUser(formData.email, formData.password);
       
-      if (usuario) {
+      if (auth && auth.token && auth.usuario) {
         setLoginMessage({
           type: 'success',
-          text: `¡Bienvenido, ${usuario.nombre}!`
+          text: `¡Bienvenido, ${auth.usuario.nombre}!`
         });
         
         setIsAnimating(true);
         
         // Save authentication state and user data to localStorage
         localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('usuario', JSON.stringify(usuario));
+        localStorage.setItem('usuario', JSON.stringify(auth.usuario));
+        localStorage.setItem('authToken', auth.token);
         
         // Check if there's a pending cart item to add after login
         const pendingCartItem = localStorage.getItem('pendingCartItem');
@@ -128,7 +130,7 @@ const Login = () => {
             // Update success message to include cart addition
             setLoginMessage({
               type: 'success',
-              text: `¡Bienvenido, ${usuario.nombre}! Producto agregado al carrito.`
+              text: `¡Bienvenido, ${auth.usuario.nombre}! Producto agregado al carrito.`
             });
           } catch (error) {
             console.error('Error adding pending cart item:', error);
@@ -146,6 +148,7 @@ const Login = () => {
         });
       }
     } catch (error) {
+      console.error('Error en inicio de sesión:', error);
       setLoginMessage({
         type: 'error',
         text: 'Error de conexión. Intenta nuevamente.'

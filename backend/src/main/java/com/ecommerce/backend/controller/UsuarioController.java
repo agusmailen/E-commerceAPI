@@ -3,6 +3,7 @@ package com.ecommerce.backend.controller;
 import com.ecommerce.backend.dto.LoginDTO;
 import com.ecommerce.backend.dto.RegistroUsuarioDTO;
 import com.ecommerce.backend.dto.UsuarioDTO;
+import com.ecommerce.backend.dto.AuthResponse;
 import com.ecommerce.backend.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,9 @@ public class UsuarioController {
     }
     
     @PostMapping("/login")
-    public ResponseEntity<UsuarioDTO> login(@Valid @RequestBody LoginDTO loginDTO) {
-        UsuarioDTO usuario = usuarioService.autenticarUsuario(loginDTO);
-        return ResponseEntity.ok(usuario);
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginDTO loginDTO) {
+        String token = usuarioService.autenticarYGenerarToken(loginDTO);
+        UsuarioDTO usuario = usuarioService.obtenerPorEmail(loginDTO.getEmail());
+        return ResponseEntity.ok(new AuthResponse(token, usuario));
     }
 }
