@@ -5,12 +5,15 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Data
 @Entity
 @Table(name = "productos")
 public class Producto {
@@ -84,94 +87,7 @@ public class Producto {
         this.categoria = categoria;
         this.stock = stock;
     }
-    
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-    public String getNombre() {
-        return nombre;
-    }
-    
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    
-    public String getDescripcion() {
-        return descripcion;
-    }
-    
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-    
-    public BigDecimal getPrecio() {
-        return precio;
-    }
-    
-    public void setPrecio(BigDecimal precio) {
-        this.precio = precio;
-    }
-    
-    public String getImagen() {
-        return imagen;
-    }
-    
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
-    
-    public List<String> getImagenes() {
-        return imagenes;
-    }
-    
-    public void setImagenes(List<String> imagenes) {
-        this.imagenes = imagenes;
-    }
-    
-    public String getCategoria() {
-        return categoria;
-    }
-    
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-    
-    public Integer getStock() {
-        return stock;
-    }
-    
-    public void setStock(Integer stock) {
-        this.stock = stock;
-        // Actualizar estado basado en stock
-        if (stock == 0) {
-            this.estado = Estado.AGOTADO;
-        } else if (this.estado == Estado.AGOTADO) {
-            this.estado = Estado.ACTIVO;
-        }
-    }
-    
-    public Estado getEstado() {
-        return estado;
-    }
-    
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-    
-    public Map<String, String> getDetalles() {
-        return detalles;
-    }
-    
-    public void setDetalles(Map<String, String> detalles) {
-        this.detalles = detalles;
-    }
-    
+
     // Helper methods
     public boolean isDisponible() {
         return estado == Estado.ACTIVO && stock > 0;

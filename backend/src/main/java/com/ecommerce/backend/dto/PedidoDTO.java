@@ -8,7 +8,9 @@ import java.util.List;
 import com.ecommerce.backend.entity.Pedido;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
+@Data
 public class PedidoDTO {
     private Long id;
 
@@ -29,20 +31,4 @@ public class PedidoDTO {
         this.createdAt = pedido.getCreatedAt();
         pedido.getItems().forEach(i -> this.items.add(new PedidoItemDTO(i)));
     }
-
-    // getters y setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public Long getUsuarioId() { return usuarioId; }
-    public void setUsuarioId(Long usuarioId) { this.usuarioId = usuarioId; }
-
-    public List<PedidoItemDTO> getItems() { return items; }
-    public void setItems(List<PedidoItemDTO> items) { this.items = items; }
-
-    public BigDecimal getTotal() { return total; }
-    public void setTotal(BigDecimal total) { this.total = total; }
-
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }
