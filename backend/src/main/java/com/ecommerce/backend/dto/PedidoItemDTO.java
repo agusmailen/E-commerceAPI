@@ -6,7 +6,9 @@ import com.ecommerce.backend.entity.PedidoItem;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
+@Data
 public class PedidoItemDTO {
     private Long id;
 
@@ -27,17 +29,4 @@ public class PedidoItemDTO {
         this.cantidad = item.getCantidad();
         this.precioUnitario = item.getPrecioUnitario();
     }
-
-    // getters y setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public Long getProductoId() { return productoId; }
-    public void setProductoId(Long productoId) { this.productoId = productoId; }
-
-    public Integer getCantidad() { return cantidad; }
-    public void setCantidad(Integer cantidad) { this.cantidad = cantidad; }
-
-    public BigDecimal getPrecioUnitario() { return precioUnitario; }
-    public void setPrecioUnitario(BigDecimal precioUnitario) { this.precioUnitario = precioUnitario; }
 }
