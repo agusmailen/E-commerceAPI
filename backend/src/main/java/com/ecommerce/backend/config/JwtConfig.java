@@ -27,12 +27,6 @@ public class JwtConfig {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
-    @PostConstruct
-    public void init() {
-        log.info("JWT Secret loaded: {} characters", jwtSecret != null ? jwtSecret.length() : 0);
-        log.info("JWT Secret value: {}", jwtSecret);
-    }
-
     @Bean
     public SecretKey secretKey() {
         // Decode base64 secret and create SecretKey

@@ -11,7 +11,7 @@ export async function registerUser(payload) {
       password: payload.password
     };
 
-    const res = await fetch(`${BASE_URL}/usuarios`, {
+    const res = await fetch(`${BASE_URL}/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData)

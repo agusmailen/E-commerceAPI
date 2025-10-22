@@ -21,7 +21,7 @@ useEffect(() => {
   const fetchProducts = async () => {
     try {
       // 2. Llama a la API
-      const res = await fetch("http://localhost:3000/productos");
+      const res = await fetch("http://localhost:8080/api/productos");
 
       // 3. Verifica que la respuesta sea correcta
       if (!res.ok) throw new Error("Error al obtener productos");
