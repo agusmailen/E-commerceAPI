@@ -27,3 +27,9 @@ logging:
     com.ecommerce.backend: DEBUG
     org.springframework.web: DEBUG
     org.hibernate.SQL: DEBUG
+
+# JWT configuration (development secret; move to environment variable in production)
+jwt:
+  secret: "IKiAXHXPj5Dmk2e3yquI6sTywrqD0nifOQf1ut33X58="
+  issuer: "ecommerce-api"
+  expiration-minutes: 60

@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ecommerce.backend.dto.UsuarioDTO;
+import com.ecommerce.backend.entity.Usuario;
+import com.ecommerce.backend.exception.ResourceNotFoundException;
 import com.ecommerce.backend.repository.UsuarioRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -23,5 +25,11 @@ public class UsuarioService {
                 .stream()
                 .map(UsuarioDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    public UsuarioDTO obtenerPorEmail(String email) {
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario", "email", email));
+        return new UsuarioDTO(usuario);
     }
 }

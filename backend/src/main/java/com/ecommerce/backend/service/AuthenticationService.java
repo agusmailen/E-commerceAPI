@@ -24,6 +24,7 @@ public class AuthenticationService {
     private final UsuarioRepository usuarioRepository;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     public UsuarioDTO registrarUsuario(RegistroUsuarioDTO registroDTO) {
         // Verificar si el email ya existe
@@ -50,17 +51,12 @@ public class AuthenticationService {
         return new UsuarioDTO(usuarioGuardado);
     }
 
-    public UsuarioDTO autenticarUsuario(LoginDTO loginDTO) {
-        authenticationManager.authenticate(
+    public String autenticarYGenerarToken(LoginDTO loginDTO) {
+        var authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginDTO.getEmail(),
                         loginDTO.getPassword()
                 ));
-
-       Usuario usuario = usuarioRepository.findByEmail(loginDTO.getEmail())
-            .orElseThrow(() -> new BadRequestException("Usuario no encontrado"));
-
-        return new UsuarioDTO(usuario);
+        return jwtService.generateToken(authentication);
     }
-    
 }

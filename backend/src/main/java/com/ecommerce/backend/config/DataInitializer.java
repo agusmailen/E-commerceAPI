@@ -6,6 +6,7 @@ import com.ecommerce.backend.repository.ProductoRepository;
 import com.ecommerce.backend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -21,6 +22,9 @@ public class DataInitializer implements CommandLineRunner {
 
     @Autowired
     private ProductoRepository productoRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
@@ -39,7 +43,7 @@ public class DataInitializer implements CommandLineRunner {
     private void crearUsuarios() {
         Usuario admin = new Usuario();
         admin.setEmail("admin@shophub.com");
-        admin.setPassword("admin123");
+        admin.setPassword(passwordEncoder.encode("admin123"));
         admin.setNombre("Administrador");
         admin.setFirstName("Admin");
         admin.setLastName("Sistema");
@@ -48,7 +52,7 @@ public class DataInitializer implements CommandLineRunner {
 
         Usuario usuario = new Usuario();
         usuario.setEmail("usuario@shophub.com");
-        usuario.setPassword("usuario123");
+        usuario.setPassword(passwordEncoder.encode("usuario123"));
         usuario.setNombre("Usuario Demo");
         usuario.setFirstName("Usuario");
         usuario.setLastName("Demo");
@@ -57,7 +61,7 @@ public class DataInitializer implements CommandLineRunner {
 
         Usuario juan = new Usuario();
         juan.setEmail("juan@shophub.com");
-        juan.setPassword("juan123");
+        juan.setPassword(passwordEncoder.encode("juan123"));
         juan.setNombre("Juan Pérez");
         juan.setFirstName("Juan");
         juan.setLastName("Pérez");
@@ -66,7 +70,7 @@ public class DataInitializer implements CommandLineRunner {
 
         Usuario maria = new Usuario();
         maria.setEmail("maria@shophub.com");
-        maria.setPassword("maria123");
+        maria.setPassword(passwordEncoder.encode("maria123"));
         maria.setNombre("María García");
         maria.setFirstName("María");
         maria.setLastName("García");

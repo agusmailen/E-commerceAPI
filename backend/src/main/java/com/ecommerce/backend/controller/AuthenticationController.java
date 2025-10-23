@@ -1,5 +1,6 @@
 package com.ecommerce.backend.controller;
 
+import com.ecommerce.backend.dto.AuthResponse;
 import com.ecommerce.backend.dto.LoginDTO;
 import com.ecommerce.backend.dto.RegistroUsuarioDTO;
 import com.ecommerce.backend.dto.UsuarioDTO;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.backend.service.AuthenticationService;
+import com.ecommerce.backend.service.UsuarioService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
+    private final UsuarioService usuarioService;
 
     @PostMapping("/register")
     public ResponseEntity<UsuarioDTO> registrarUsuario(@Valid @RequestBody RegistroUsuarioDTO registroDTO) {
@@ -32,8 +35,9 @@ public class AuthenticationController {
     }
     
     @PostMapping("/login")
-    public ResponseEntity<UsuarioDTO> login(@Valid @RequestBody LoginDTO loginDTO) {
-        UsuarioDTO usuario = authenticationService.autenticarUsuario(loginDTO);
-        return ResponseEntity.ok(usuario);
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginDTO loginDTO) {
+        String token = authenticationService.autenticarYGenerarToken(loginDTO);
+        UsuarioDTO usuario = usuarioService.obtenerPorEmail(loginDTO.getEmail());
+        return ResponseEntity.ok(new AuthResponse(token, usuario));
     }
 }

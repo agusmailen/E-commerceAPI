@@ -29,7 +29,8 @@ const ProductInfo = ({ onProductLoaded }) => {
     if (id) {
       fetchProduct();
     }
-  }, [id, onProductLoaded]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   if (!producto) {
     return <div className="pi-container">Cargando producto...</div>;
