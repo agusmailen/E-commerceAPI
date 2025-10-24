@@ -28,6 +28,43 @@ const ProductManagement = () => {
 
   useEffect(() => { loadProductos(); }, []);
 
+  // --- Pedidos por usuario (admin) ---
+  const [usuarios, setUsuarios] = useState([]);
+  const [pedidosPorUsuario, setPedidosPorUsuario] = useState([]);
+  const [loadingPedidos, setLoadingPedidos] = useState(false);
+  const [pedidosError, setPedidosError] = useState(null);
+
+  const loadUsuariosYPedidos = async () => {
+    setLoadingPedidos(true);
+    setPedidosError(null);
+    try {
+      const resUsers = await fetch(`${API_BASE}/usuarios`, { headers: getAuthHeaders() });
+      if (!resUsers.ok) throw new Error('No se pudieron obtener los usuarios');
+      const users = await resUsers.json();
+      setUsuarios(users);
+
+      // Para cada usuario pedir sus pedidos
+      const pedidosPromises = users.map(async (u) => {
+        try {
+          const r = await fetch(`${API_BASE}/pedidos/usuario/${u.id}`, { headers: getAuthHeaders() });
+          if (!r.ok) return { usuario: u, pedidos: [] };
+          const pd = await r.json();
+          return { usuario: u, pedidos: pd };
+        } catch (err) {
+          return { usuario: u, pedidos: [] };
+        }
+      });
+
+      const results = await Promise.all(pedidosPromises);
+      setPedidosPorUsuario(results);
+    } catch (e) {
+      console.error(e);
+      setPedidosError(e.message || 'Error al cargar pedidos');
+    } finally {
+      setLoadingPedidos(false);
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -111,7 +148,7 @@ const ProductManagement = () => {
   return (
     <div className="pm-container">
       <Header />
-      <h1 className="pm-title">⚙️ Gestión de Productos</h1>
+  <h1 className="pm-title">⚙️ Gestión</h1>
       <div className="pm-panels">
         <section className="pm-panel pm-left">
           <button className="pm-primary" type="button" onClick={handleResetNew}>Crear Nuevo Producto</button>
@@ -166,6 +203,52 @@ const ProductManagement = () => {
           )}
         </section>
       </div>
+      
+        <section className="pm-panel pm-fullwidth" style={{ marginTop: 24 }}>
+          <h2 className="pm-subtitle">📦 Pedidos por Usuario</h2>
+          <div style={{ marginBottom: 12 }}>
+            <button className="pm-chip" type="button" onClick={loadUsuariosYPedidos}>Actualizar Pedidos</button>
+          </div>
+          {loadingPedidos ? (
+            <div className="pm-muted">Cargando pedidos...</div>
+          ) : pedidosError ? (
+            <div className="pm-error">Error: {pedidosError}</div>
+          ) : (
+            <div style={{ overflowX: 'auto' }}>
+              <table className="pm-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
+                <thead>
+                  <tr>
+                    <th>Usuario</th>
+                    <th>Email</th>
+                    <th>Pedido ID</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/** construir lista plana solo con pedidos existentes */}
+                  {pedidosPorUsuario && pedidosPorUsuario.length > 0 ? (
+                    pedidosPorUsuario.flatMap(entry => (entry.pedidos || []).map(pedido => ({ usuario: entry.usuario, pedido }))).length === 0 ? (
+                      <tr><td colSpan={5} className="pm-muted">No hay pedidos todavía</td></tr>
+                    ) : (
+                      pedidosPorUsuario.flatMap(entry => (entry.pedidos || []).map(pedido => ({ usuario: entry.usuario, pedido }))).map(({ usuario, pedido }) => (
+                        <tr key={`p-${pedido.id}`}>
+                          <td>{usuario.nombre}</td>
+                          <td>{usuario.email}</td>
+                          <td>{pedido.id}</td>
+                          <td>{pedido.createdAt ? new Date(pedido.createdAt).toLocaleString() : '-'}</td>
+                          <td>{pedido.total ?? '-'}</td>
+                        </tr>
+                      ))
+                    )
+                  ) : (
+                    <tr><td colSpan={5} className="pm-muted">No hay pedidos todavía</td></tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </section>
     </div>
   );
 };

@@ -99,7 +99,7 @@ export const Header = () => {
                     className={`btn-primary ${isActive('/admin/products') ? 'active' : ''}`}
                     onClick={() => navigate('/admin/products')}
                   >
-                    Gestionar Productos
+                    Gestión de Tienda
                   </button>
                 )}
                 <button 
