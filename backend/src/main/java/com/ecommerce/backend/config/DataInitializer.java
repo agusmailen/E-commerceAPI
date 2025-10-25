@@ -1,7 +1,9 @@
 package com.ecommerce.backend.config;
 
+import com.ecommerce.backend.entity.Categoria;
 import com.ecommerce.backend.entity.Producto;
 import com.ecommerce.backend.entity.Usuario;
+import com.ecommerce.backend.repository.CategoriaRepository;
 import com.ecommerce.backend.repository.ProductoRepository;
 import com.ecommerce.backend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class DataInitializer implements CommandLineRunner {
 
     @Autowired
     private ProductoRepository productoRepository;
+    
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -36,8 +41,39 @@ public class DataInitializer implements CommandLineRunner {
         // Crear usuarios
         crearUsuarios();
         
+        // Crear categorías
+        crearCategorias();
+        
         // Crear productos
         crearProductos();
+    }
+    
+    private void crearCategorias() {
+        Categoria tecnologia = new Categoria();
+        tecnologia.setNombre("Tecnología");
+        tecnologia.setDescripcion("Productos tecnológicos y electrónicos de última generación");
+        tecnologia.setImagenUrl("https://picsum.photos/id/180/400/300");
+        tecnologia.setEstado(Categoria.Estado.ACTIVA);
+        
+        Categoria deportes = new Categoria();
+        deportes.setNombre("Deportes");
+        deportes.setDescripcion("Artículos deportivos y equipamiento para todo tipo de deportes");
+        deportes.setImagenUrl("https://picsum.photos/id/403/400/300");
+        deportes.setEstado(Categoria.Estado.ACTIVA);
+        
+        Categoria fotografia = new Categoria();
+        fotografia.setNombre("Fotografía");
+        fotografia.setDescripcion("Equipos y accesorios para fotografía profesional y amateur");
+        fotografia.setImagenUrl("https://picsum.photos/id/250/400/300");
+        fotografia.setEstado(Categoria.Estado.ACTIVA);
+        
+        Categoria accesorios = new Categoria();
+        accesorios.setNombre("Accesorios");
+        accesorios.setDescripcion("Accesorios diversos para complementar tu estilo de vida");
+        accesorios.setImagenUrl("https://picsum.photos/id/225/400/300");
+        accesorios.setEstado(Categoria.Estado.ACTIVA);
+        
+        categoriaRepository.saveAll(Arrays.asList(tecnologia, deportes, fotografia, accesorios));
     }
 
     private void crearUsuarios() {
@@ -81,13 +117,19 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void crearProductos() {
+        // Obtener las categorías creadas
+        Categoria tecnologia = categoriaRepository.findByNombre("Tecnología").orElseThrow();
+        Categoria deportes = categoriaRepository.findByNombre("Deportes").orElseThrow();
+        Categoria fotografia = categoriaRepository.findByNombre("Fotografía").orElseThrow();
+        Categoria accesorios = categoriaRepository.findByNombre("Accesorios").orElseThrow();
+        
         // Producto 1
         Producto camara = new Producto();
         camara.setNombre("Cámara Canon EOS R5");
         camara.setDescripcion("Cámara mirrorless profesional con sensor full-frame de 45MP");
         camara.setPrecio(BigDecimal.valueOf(3899.99));
         camara.setImagen("https://picsum.photos/id/250/800/600");
-        camara.setCategoria("Fotografía");
+        camara.setCategoria(fotografia);
         camara.setStock(0);
         camara.setEstado(Producto.Estado.AGOTADO);
 
@@ -97,7 +139,7 @@ public class DataInitializer implements CommandLineRunner {
         guantes.setDescripcion("Guantes profesionales de boxeo con protección extra");
         guantes.setPrecio(BigDecimal.valueOf(89.99));
         guantes.setImagen("https://picsum.photos/id/345/800/600");
-        guantes.setCategoria("Deportes");
+        guantes.setCategoria(deportes);
         guantes.setStock(0);
         guantes.setEstado(Producto.Estado.AGOTADO);
         guantes.setImagenes(Arrays.asList(
@@ -118,7 +160,7 @@ public class DataInitializer implements CommandLineRunner {
         smartwatch.setDescripcion("Reloj inteligente con monitoreo avanzado de salud");
         smartwatch.setPrecio(BigDecimal.valueOf(299.99));
         smartwatch.setImagen("https://picsum.photos/id/160/800/600");
-        smartwatch.setCategoria("Tecnología");
+        smartwatch.setCategoria(tecnologia);
         smartwatch.setStock(0);
         smartwatch.setEstado(Producto.Estado.AGOTADO);
         smartwatch.setImagenes(Arrays.asList(
@@ -139,7 +181,7 @@ public class DataInitializer implements CommandLineRunner {
         zapatillas.setDescripcion("Zapatillas profesionales para running con máxima amortiguación");
         zapatillas.setPrecio(BigDecimal.valueOf(129.99));
         zapatillas.setImagen("https://picsum.photos/id/400/800/600");
-        zapatillas.setCategoria("Deportes");
+        zapatillas.setCategoria(deportes);
         zapatillas.setStock(25);
         zapatillas.setEstado(Producto.Estado.ACTIVO);
 
@@ -149,7 +191,7 @@ public class DataInitializer implements CommandLineRunner {
         laptop.setDescripcion("Laptop gaming con RTX 4060 y procesador Intel i9");
         laptop.setPrecio(BigDecimal.valueOf(1999.99));
         laptop.setImagen("https://picsum.photos/id/201/800/600");
-        laptop.setCategoria("Tecnología");
+        laptop.setCategoria(tecnologia);
         laptop.setStock(12);
         laptop.setEstado(Producto.Estado.ACTIVO);
         laptop.setImagenes(Arrays.asList(
@@ -170,7 +212,7 @@ public class DataInitializer implements CommandLineRunner {
         raqueta.setDescripcion("Raqueta profesional de tenis con marco de grafito");
         raqueta.setPrecio(BigDecimal.valueOf(199.99));
         raqueta.setImagen("https://picsum.photos/id/450/800/600");
-        raqueta.setCategoria("Deportes");
+        raqueta.setCategoria(deportes);
         raqueta.setStock(18);
         raqueta.setEstado(Producto.Estado.ACTIVO);
         raqueta.setImagenes(Arrays.asList(
@@ -191,7 +233,7 @@ public class DataInitializer implements CommandLineRunner {
         drone.setDescripcion("Drone con cámara 4K y sensor de 1 pulgada");
         drone.setPrecio(BigDecimal.valueOf(999.99));
         drone.setImagen("https://picsum.photos/id/300/800/600");
-        drone.setCategoria("Fotografía");
+        drone.setCategoria(fotografia);
         drone.setStock(10);
         drone.setEstado(Producto.Estado.ACTIVO);
         drone.setImagenes(Arrays.asList(
@@ -212,7 +254,7 @@ public class DataInitializer implements CommandLineRunner {
         bicicleta.setDescripcion("Bicicleta de montaña con cuadro de aluminio y 21 velocidades");
         bicicleta.setPrecio(BigDecimal.valueOf(799.99));
         bicicleta.setImagen("https://picsum.photos/id/146/800/600");
-        bicicleta.setCategoria("Deportes");
+        bicicleta.setCategoria(deportes);
         bicicleta.setStock(8);
         bicicleta.setEstado(Producto.Estado.ACTIVO);
         bicicleta.setImagenes(Arrays.asList(
@@ -233,7 +275,7 @@ public class DataInitializer implements CommandLineRunner {
         auriculares.setDescripcion("Auriculares premium con cancelación de ruido");
         auriculares.setPrecio(BigDecimal.valueOf(399.99));
         auriculares.setImagen("https://picsum.photos/id/325/800/600");
-        auriculares.setCategoria("Tecnología");
+        auriculares.setCategoria(tecnologia);
         auriculares.setStock(22);
         auriculares.setEstado(Producto.Estado.ACTIVO);
         auriculares.setImagenes(Arrays.asList(
@@ -254,7 +296,7 @@ public class DataInitializer implements CommandLineRunner {
         mochila.setDescripcion("Mochila profesional para equipo fotográfico");
         mochila.setPrecio(BigDecimal.valueOf(149.99));
         mochila.setImagen("https://picsum.photos/id/250/800/600");
-        mochila.setCategoria("Fotografía");
+        mochila.setCategoria(fotografia);
         mochila.setStock(15);
         mochila.setEstado(Producto.Estado.ACTIVO);
         mochila.setImagenes(Arrays.asList(
@@ -275,7 +317,7 @@ public class DataInitializer implements CommandLineRunner {
         pelota.setDescripcion("Pelota de fútbol oficial con tecnología aerodinámica");
         pelota.setPrecio(BigDecimal.valueOf(49.99));
         pelota.setImagen("https://picsum.photos/id/358/800/600");
-        pelota.setCategoria("Deportes");
+        pelota.setCategoria(deportes);
         pelota.setStock(40);
         pelota.setEstado(Producto.Estado.ACTIVO);
         pelota.setImagenes(Arrays.asList(
@@ -296,7 +338,7 @@ public class DataInitializer implements CommandLineRunner {
         termo.setDescripcion("Termo de acero inoxidable con aislamiento al vacío");
         termo.setPrecio(BigDecimal.valueOf(44.99));
         termo.setImagen("https://picsum.photos/id/225/800/600");
-        termo.setCategoria("Accesorios");
+        termo.setCategoria(accesorios);
         termo.setStock(35);
         termo.setEstado(Producto.Estado.ACTIVO);
         termo.setImagenes(Arrays.asList(
