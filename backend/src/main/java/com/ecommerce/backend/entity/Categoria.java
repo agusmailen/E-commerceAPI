@@ -58,7 +58,7 @@ public class Categoria {
         }
     }
     
-    // Constructors
+    // Constructores
     public Categoria() {}
     
     public Categoria(String nombre, String descripcion) {
