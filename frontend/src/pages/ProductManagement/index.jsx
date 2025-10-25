@@ -56,7 +56,7 @@ const ProductManagement = () => {
     }
   }, []);
 
-  // --- Pedidos por usuario (admin) ---
+  // --- Pedidos por usuario (admin) -
   const [usuarios, setUsuarios] = useState([]);
   const [pedidosPorUsuario, setPedidosPorUsuario] = useState([]);
   const [loadingPedidos, setLoadingPedidos] = useState(false);
