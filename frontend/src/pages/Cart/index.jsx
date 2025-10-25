@@ -73,25 +73,52 @@ const CartView = () => {
       return;
     }
 
-    try {
-      // Actualizar el stock de cada producto
-      for (const item of cartItems) {
-        const response = await fetch(`http://localhost:3000/productos/${item.id}`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            stock: item.stock - item.quantity
-          })
-        });
+    // Construir payload para el backend
+    const usuario = JSON.parse(localStorage.getItem('usuario') || 'null');
+    const token = localStorage.getItem('authToken');
 
-        if (!response.ok) {
-          throw new Error(`Error al actualizar el stock del producto ${item.nombre}`);
+    if (!token || !usuario || !usuario.id) {
+      // Guardar el carrito pendiente y redirigir a login para que el usuario complete la compra tras autenticarse
+      try {
+        localStorage.setItem('pendingCart', JSON.stringify(cartItems));
+      } catch (e) {
+        // ignore
+      }
+      navigate('/login');
+      return;
+    }
+
+    const pedidoPayload = {
+      usuarioId: usuario.id,
+      items: cartItems.map(item => ({
+        productoId: item.id,
+        cantidad: item.quantity
+      }))
+    };
+
+    try {
+      const res = await fetch('http://localhost:8080/api/pedidos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(pedidoPayload)
+      });
+
+      if (!res.ok) {
+        // intentar leer mensaje del backend
+        let errMsg = 'Error al crear el pedido.';
+        try {
+          const err = await res.json();
+          errMsg = err.message || err.error || JSON.stringify(err);
+        } catch (e) {
+          // ignore
         }
+        throw new Error(errMsg);
       }
 
-      // Si todo salió bien, limpiar el carrito y mostrar banner de éxito
+      // Pedido creado con éxito — backend ya descontó stock
       clearCart();
       setSuccessBanner(true);
       setTimeout(() => {
@@ -100,7 +127,7 @@ const CartView = () => {
       }, 3000);
     } catch (error) {
       console.error('Error al procesar la compra:', error);
-      // Puedes mostrar un banner de error si lo deseas
+      alert(error.message || 'No se pudo concretar la compra. Verifica el stock y vuelve a intentar.');
     }
   };
 

@@ -112,4 +112,36 @@
   }
 }
 
+/* Table tweaks for Pedidos por Usuario */
+.pm-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto; /* allow natural widths */
+}
+.pm-table th, .pm-table td {
+  padding: 12px 16px;
+  text-align: center; /* center contents in each column */
+  vertical-align: middle;
+  color: #0f172a;
+  font-weight: 700;
+}
+.pm-table thead th {
+  font-size: 14px;
+  background: transparent;
+  color: #0f172a;
+  opacity: 0.95;
+}
+.pm-table tbody td {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* make Usuario/Email slightly left-aligned on very small screens for readability */
+@media (max-width: 600px) {
+  .pm-table th:first-child, .pm-table td:first-child,
+  .pm-table th:nth-child(2), .pm-table td:nth-child(2) {
+    text-align: left;
+  }
+}
+
 
