@@ -20,7 +20,7 @@ public class CategoriaDTO {
     
     private Integer cantidadProductos;
     
-    // Constructors
+    // Constructores
     public CategoriaDTO() {}
     
     public CategoriaDTO(Categoria categoria) {
