@@ -6,6 +6,7 @@ const API_BASE = 'http://localhost:8080/api';
 const ProductManagement = () => {
   const [form, setForm] = useState({ nombre: '', descripcion: '', precio: '', categoria: '', imagen: '', stock: '', estado: 'activo' });
   const [productos, setProductos] = useState([]);
+  const [categorias, setCategorias] = useState([]); // Estado para categorías
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [editingId, setEditingId] = useState(null);
@@ -26,7 +27,34 @@ const ProductManagement = () => {
     }
   };
 
-  useEffect(() => { loadProductos(); }, []);
+  const loadCategorias = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/categorias`);
+      const data = await res.json();
+      setCategorias(data);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => { 
+    loadProductos(); 
+    loadCategorias();
+    
+    // Verificar si el usuario es admin
+    const usuarioStr = localStorage.getItem('usuario');
+    if (usuarioStr) {
+      try {
+        const usuario = JSON.parse(usuarioStr);
+        // Comparar en mayúsculas para evitar problemas de case-sensitivity
+        if (usuario.rol && usuario.rol.toUpperCase() !== 'ADMIN') {
+          alert('⚠️ Advertencia: Esta página es solo para administradores. Solo podrás ver productos, no editarlos.');
+        }
+      } catch (e) {
+        console.error('Error parsing usuario:', e);
+      }
+    }
+  }, []);
 
   // --- Pedidos por usuario (admin) ---
   const [usuarios, setUsuarios] = useState([]);
@@ -89,16 +117,31 @@ const ProductManagement = () => {
         precio: Number(form.precio),
         imagen: form.imagen || 'https://picsum.photos/seed/new/800/600',
         imagenes: [form.imagen || 'https://picsum.photos/seed/new/800/600'],
-        categoria: form.categoria,
+        categoriaId: Number(form.categoria), // Convertir a número para el backend
         stock: Number(form.stock),
         estado: form.estado || 'activo',
         detalles: {}
       };
       const base = API_BASE;
       if (editingId) {
-        await fetch(`${base}/productos/${editingId}`, { method: 'PATCH', headers: getAuthHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify(body) });
+        const res = await fetch(`${base}/productos/${editingId}`, { 
+          method: 'PUT', // Cambiar PATCH a PUT 
+          headers: getAuthHeaders({ 'Content-Type': 'application/json' }), 
+          body: JSON.stringify(body) 
+        });
+        if (res.status === 403) {
+          throw new Error('Acceso denegado: Necesitas ser administrador para editar productos');
+        }
+        if (!res.ok) throw new Error('No se pudo actualizar el producto');
       } else {
-        const res = await fetch(`${base}/productos`, { method: 'POST', headers: getAuthHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify(body) });
+        const res = await fetch(`${base}/productos`, { 
+          method: 'POST', 
+          headers: getAuthHeaders({ 'Content-Type': 'application/json' }), 
+          body: JSON.stringify(body) 
+        });
+        if (res.status === 403) {
+          throw new Error('Acceso denegado: Necesitas ser administrador para crear productos');
+        }
         if (!res.ok) throw new Error('No se pudo crear el producto');
       }
       setForm({ nombre: '', descripcion: '', precio: '', categoria: '', imagen: '', stock: '', estado: 'activo' });
@@ -106,6 +149,7 @@ const ProductManagement = () => {
       await loadProductos();
     } catch (e) {
       console.error(e);
+      alert('Error: ' + e.message); // Mostrar error al usuario
     } finally {
       setSubmitting(false);
     }
@@ -121,10 +165,35 @@ const ProductManagement = () => {
 
   const handleEstadoChange = async (id, estado) => {
     try {
+      const producto = productos.find(p => p.id === id);
+      if (!producto) return;
+      
+      const body = {
+        nombre: producto.nombre,
+        descripcion: producto.descripcion,
+        precio: producto.precio,
+        imagen: producto.imagen,
+        imagenes: producto.imagenes || [producto.imagen],
+        categoriaId: producto.categoriaId,
+        stock: producto.stock,
+        estado: estado,
+        detalles: producto.detalles || {}
+      };
+      
       const base = API_BASE;
-      await fetch(`${base}/productos/${id}`, { method: 'PATCH', headers: getAuthHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify({ estado }) });
+      const res = await fetch(`${base}/productos/${id}`, { 
+        method: 'PUT', 
+        headers: getAuthHeaders({ 'Content-Type': 'application/json' }), 
+        body: JSON.stringify(body) 
+      });
+      
+      if (!res.ok) throw new Error('No se pudo actualizar el estado');
+      
       setProductos((prev) => prev.map((p) => (p.id === id ? { ...p, estado } : p)));
-    } catch (e) { console.error(e); }
+    } catch (e) { 
+      console.error(e);
+      alert('Error al actualizar estado: ' + e.message);
+    }
   };
 
   const handleEdit = (producto) => {
@@ -133,7 +202,7 @@ const ProductManagement = () => {
       nombre: producto.nombre || '',
       descripcion: producto.descripcion || '',
       precio: String(producto.precio ?? ''),
-      categoria: producto.categoria || '',
+      categoria: String(producto.categoriaId ?? ''), // Usar categoriaId en lugar de categoria
       imagen: producto.imagen || '',
       stock: String(producto.stock ?? ''),
       estado: producto.estado || (producto.stock > 0 ? 'activo' : 'agotado')
@@ -157,7 +226,14 @@ const ProductManagement = () => {
             <div className="pm-field"><input className="pm-input" name="nombre" value={form.nombre} onChange={handleChange} placeholder="💬 Nombre del Producto" /></div>
             <div className="pm-field"><input className="pm-input" name="descripcion" value={form.descripcion} onChange={handleChange} placeholder="💬 Descripción" /></div>
             <div className="pm-field"><input className="pm-input" name="precio" type="number" step="0.01" value={form.precio} onChange={handleChange} placeholder="💰 Precio" /></div>
-            <div className="pm-field"><input className="pm-input" name="categoria" value={form.categoria} onChange={handleChange} placeholder="🗂️ Categoría" /></div>
+            <div className="pm-field">
+              <select className="pm-input" name="categoria" value={form.categoria} onChange={handleChange}>
+                <option value="">🗂️ Selecciona una Categoría</option>
+                {categorias.map((cat) => (
+                  <option key={cat.id} value={cat.id}>{cat.nombre}</option>
+                ))}
+              </select>
+            </div>
             <div className="pm-field"><input className="pm-input" name="imagen" value={form.imagen} onChange={handleChange} placeholder="📸 URL de Imagen" /></div>
             <div className="pm-field"><input className="pm-input" name="stock" type="number" value={form.stock} onChange={handleChange} placeholder="💬 Stock Inicial" /></div>
             <div className="pm-field">
@@ -185,6 +261,7 @@ const ProductManagement = () => {
             productos.map((p) => (
               <div key={p.id} className="pm-card">
                 <div className="pm-card-title">{p.nombre}</div>
+                <div className="pm-card-sub">{p.categoriaNombre || 'Sin categoría'}</div>
                 <div className="pm-card-sub">Stock: {p.stock} | Precio: ${p.precio}</div>
                 <div className="pm-row">
                   <label className="pm-label">Estado</label>
