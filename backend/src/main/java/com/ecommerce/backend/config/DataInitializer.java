@@ -33,19 +33,22 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Verificar si ya hay datos
-        if (usuarioRepository.count() > 0) {
-            return; // Ya hay datos, no inicializar
+        // Inicialización idempotente:
+        // - Crear usuarios si no existen
+        // - Crear categorías si no existen
+        // - Crear productos si no existen
+
+        if (usuarioRepository.count() == 0) {
+            crearUsuarios();
         }
 
-        // Crear usuarios
-        crearUsuarios();
-        
-        // Crear categorías
-        crearCategorias();
-        
-        // Crear productos
-        crearProductos();
+        if (categoriaRepository.count() == 0) {
+            crearCategorias();
+        }
+
+        if (productoRepository.count() == 0) {
+            crearProductos();
+        }
     }
     
     private void crearCategorias() {
@@ -117,11 +120,11 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void crearProductos() {
-        // Obtener las categorías creadas
-        Categoria tecnologia = categoriaRepository.findByNombre("Tecnología").orElseThrow();
-        Categoria deportes = categoriaRepository.findByNombre("Deportes").orElseThrow();
-        Categoria fotografia = categoriaRepository.findByNombre("Fotografía").orElseThrow();
-        Categoria accesorios = categoriaRepository.findByNombre("Accesorios").orElseThrow();
+        // Obtener (o crear si faltan) las categorías usadas por los productos.
+        Categoria tecnologia = findOrCreateCategoriaByName("Tecnología");
+        Categoria deportes = findOrCreateCategoriaByName("Deportes");
+        Categoria fotografia = findOrCreateCategoriaByName("Fotografía");
+        Categoria accesorios = findOrCreateCategoriaByName("Accesorios");
         
         // Producto 1
         Producto camara = new Producto();
@@ -357,5 +360,39 @@ public class DataInitializer implements CommandLineRunner {
             camara, guantes, smartwatch, zapatillas, laptop, raqueta,
             drone, bicicleta, auriculares, mochila, pelota, termo
         ));
+    }
+
+    /**
+     * Busca una categoría por nombre. Si no existe, intenta hacer una búsqueda insensible
+     * a mayúsculas y acentos entre las categorías existentes. Si no se encuentra, crea
+     * una nueva categoría con el nombre proporcionado.
+     */
+    private Categoria findOrCreateCategoriaByName(String nombreDeseado) {
+        // Búsqueda exacta primero
+        return categoriaRepository.findByNombre(nombreDeseado)
+                .or(() -> {
+                    // Búsqueda insensible a mayúsculas y acentos
+                    String normalizedTarget = normalize(nombreDeseado);
+                    return categoriaRepository.findAll().stream()
+                            .filter(c -> normalize(c.getNombre()).equalsIgnoreCase(normalizedTarget))
+                            .findFirst();
+                })
+                .orElseGet(() -> {
+                    // Si no existe, crear una nueva categoría mínima
+                    Categoria nueva = new Categoria();
+                    nueva.setNombre(nombreDeseado);
+                    nueva.setDescripcion(null);
+                    nueva.setImagenUrl(null);
+                    nueva.setEstado(Categoria.Estado.ACTIVA);
+                    return categoriaRepository.save(nueva);
+                });
+    }
+
+    private String normalize(String s) {
+        if (s == null) return null;
+        String n = java.text.Normalizer.normalize(s, java.text.Normalizer.Form.NFD);
+        // Remove diacritical marks
+        n = n.replaceAll("\\p{M}", "");
+        return n.toLowerCase().trim();
     }
 }
