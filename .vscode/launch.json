@@ -13,6 +13,48 @@
             "preLaunchTask": "Start Postgres (Docker Compose)",
             "console": "integratedTerminal",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Run Backend (Clean DB & Debug)",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/backend",
+            "mainClass": "com.ecommerce.backend.BackendApplication",
+            "projectName": "backend",
+            "args": "",
+            "vmArgs": "-Dspring.profiles.active=default",
+            "preLaunchTask": "Reset Postgres (Docker Compose)",
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Run Backend (Run)",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/backend",
+            "mainClass": "com.ecommerce.backend.BackendApplication",
+            "projectName": "backend",
+            "args": "",
+            "vmArgs": "-Dspring.profiles.active=default",
+            "preLaunchTask": "Start Postgres (Docker Compose)",
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "node",
+            "name": "Run Frontend (Vite)",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/frontend",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "dev"],
+            "console": "integratedTerminal",
+            "preLaunchTask": "Start Postgres (Docker Compose)"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Run Full Stack (Backend + Frontend)",
+            "configurations": ["Run Backend (Debug)", "Run Frontend (Vite)"]
         }
     ]
 }

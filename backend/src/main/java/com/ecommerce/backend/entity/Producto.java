@@ -42,9 +42,10 @@ public class Producto {
     @Column(name = "imagen_url")
     private List<String> imagenes = new ArrayList<>();
     
-    @NotBlank(message = "La categoría es obligatoria")
-    @Column(nullable = false)
-    private String categoria;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "categoria_id", nullable = false)
+    @NotNull(message = "La categoría es obligatoria")
+    private Categoria categoria;
     
     @NotNull(message = "El stock es obligatorio")
     @Min(value = 0, message = "El stock no puede ser negativo")
@@ -80,7 +81,7 @@ public class Producto {
     // Constructors
     public Producto() {}
     
-    public Producto(String nombre, String descripcion, BigDecimal precio, String categoria, Integer stock) {
+    public Producto(String nombre, String descripcion, BigDecimal precio, Categoria categoria, Integer stock) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;

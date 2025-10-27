@@ -1,5 +1,6 @@
 package com.ecommerce.backend.repository;
 
+import com.ecommerce.backend.entity.Categoria;
 import com.ecommerce.backend.entity.Producto;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,14 +12,15 @@ import java.util.List;
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
     
-    List<Producto> findByCategoria(String categoria, Sort sort);
+    List<Producto> findByCategoria(Categoria categoria, Sort sort);
+    
+    List<Producto> findByCategoriaId(Long categoriaId, Sort sort);
     
     List<Producto> findByNombreContainingIgnoreCase(String nombre, Sort sort);
     
-    List<Producto> findByCategoriaAndNombreContainingIgnoreCase(String categoria, String nombre, Sort sort);
+    List<Producto> findByCategoriaAndNombreContainingIgnoreCase(Categoria categoria, String nombre, Sort sort);
     
-    @Query("SELECT DISTINCT p.categoria FROM Producto p ORDER BY p.categoria")
-    List<String> findAllCategorias();
+    List<Producto> findByCategoriaIdAndNombreContainingIgnoreCase(Long categoriaId, String nombre, Sort sort);
     
     List<Producto> findByEstado(Producto.Estado estado, Sort sort);
     
