@@ -43,7 +43,7 @@ public class Producto {
     private List<String> imagenes = new ArrayList<>();
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "categoria_id", nullable = false)
+    @JoinColumn(name = "categoria", nullable = false)
     @NotNull(message = "La categoría es obligatoria")
     private Categoria categoria;
     

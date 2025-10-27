@@ -50,7 +50,7 @@ public class DataInitializer implements CommandLineRunner {
     
     private void crearCategorias() {
         Categoria tecnologia = new Categoria();
-        tecnologia.setNombre("Tecnología");
+        tecnologia.setNombre("Tecnologia");
         tecnologia.setDescripcion("Productos tecnológicos y electrónicos de última generación");
         tecnologia.setImagenUrl("https://picsum.photos/id/180/400/300");
         tecnologia.setEstado(Categoria.Estado.ACTIVA);

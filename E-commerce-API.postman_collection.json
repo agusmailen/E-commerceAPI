@@ -109,7 +109,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"nombre\": \"iPhone 15 Pro\",\n  \"descripcion\": \"Smartphone Apple con chip A17 Pro\",\n  \"precio\": 999.99,\n  \"categoria\": \"Tecnología\",\n  \"stock\": 25,\n  \"imagen\": \"https://picsum.photos/800/600\",\n  \"imagenes\": [\n    \"https://picsum.photos/800/600\",\n    \"https://picsum.photos/801/600\"\n  ],\n  \"estado\": \"activo\",\n  \"detalles\": {\n    \"color\": \"Titanio Natural\",\n    \"almacenamiento\": \"256GB\",\n    \"pantalla\": \"6.1 pulgadas\"\n  }\n}"
+              "raw": "{\n  \"nombre\": \"iPhone 15 Pro\",\n  \"descripcion\": \"Smartphone Apple con chip A17 Pro\",\n  \"precio\": 999.99,\n  \"categoria\": \"Tecnologia\",\n  \"stock\": 25,\n  \"imagen\": \"https://picsum.photos/800/600\",\n  \"imagenes\": [\n    \"https://picsum.photos/800/600\",\n    \"https://picsum.photos/801/600\"\n  ],\n  \"estado\": \"activo\",\n  \"detalles\": {\n    \"color\": \"Titanio Natural\",\n    \"almacenamiento\": \"256GB\",\n    \"pantalla\": \"6.1 pulgadas\"\n  }\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/productos",
@@ -130,7 +130,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"nombre\": \"iPhone 15 Pro Max\",\n  \"descripcion\": \"Smartphone Apple con chip A17 Pro - Actualizado\",\n  \"precio\": 1199.99,\n  \"categoria\": \"Tecnología\",\n  \"stock\": 15,\n  \"imagen\": \"https://picsum.photos/800/600\",\n  \"imagenes\": [\n    \"https://picsum.photos/800/600\"\n  ],\n  \"estado\": \"activo\",\n  \"detalles\": {\n    \"color\": \"Titanio Azul\",\n    \"almacenamiento\": \"512GB\",\n    \"pantalla\": \"6.7 pulgadas\"\n  }\n}"
+              "raw": "{\n  \"nombre\": \"iPhone 15 Pro Max\",\n  \"descripcion\": \"Smartphone Apple con chip A17 Pro - Actualizado\",\n  \"precio\": 1199.99,\n  \"categoria\": \"Tecnologia\",\n  \"stock\": 15,\n  \"imagen\": \"https://picsum.photos/800/600\",\n  \"imagenes\": [\n    \"https://picsum.photos/800/600\"\n  ],\n  \"estado\": \"activo\",\n  \"detalles\": {\n    \"color\": \"Titanio Azul\",\n    \"almacenamiento\": \"512GB\",\n    \"pantalla\": \"6.7 pulgadas\"\n  }\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/productos/1",
