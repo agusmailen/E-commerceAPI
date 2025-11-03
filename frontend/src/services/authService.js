@@ -3,11 +3,12 @@ const BASE_URL = "http://localhost:8080/api";
 export async function registerUser(payload) {
   try {
     // Crear usuario directamente (el backend maneja la validación de email único)
+    // Mappear `username` -> `user` porque el DTO del backend espera la propiedad `user`
     const userData = {
       firstName: payload.firstName,
       lastName: payload.lastName,
       email: payload.email,
-      username: payload.username,
+      user: payload.username,
       password: payload.password
     };
 
