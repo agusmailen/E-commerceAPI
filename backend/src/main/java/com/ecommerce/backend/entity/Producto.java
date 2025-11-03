@@ -1,5 +1,7 @@
 package com.ecommerce.backend.entity;
 
+import com.ecommerce.backend.enums.Estado;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
@@ -60,22 +62,6 @@ public class Producto {
     @MapKeyColumn(name = "detalle_key")
     @Column(name = "detalle_value")
     private Map<String, String> detalles = new HashMap<>();
-    
-    public enum Estado {
-        ACTIVO("activo"),
-        AGOTADO("agotado"),
-        INACTIVO("inactivo");
-        
-        private final String value;
-        
-        Estado(String value) {
-            this.value = value;
-        }
-        
-        public String getValue() {
-            return value;
-        }
-    }
     
     // Constructors
     public Producto() {}

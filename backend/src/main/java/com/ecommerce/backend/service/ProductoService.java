@@ -2,6 +2,7 @@ package com.ecommerce.backend.service;
 
 import com.ecommerce.backend.dto.ProductoDTO;
 import com.ecommerce.backend.entity.Producto;
+import com.ecommerce.backend.enums.Estado;
 import com.ecommerce.backend.exception.ResourceNotFoundException;
 import com.ecommerce.backend.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +74,7 @@ public class ProductoService {
         producto.setDetalles(productoDTO.getDetalles());
         
         if (productoDTO.getEstado() != null) {
-            producto.setEstado(Producto.Estado.valueOf(productoDTO.getEstado().toUpperCase()));
+            producto.setEstado(Estado.valueOf(productoDTO.getEstado().toUpperCase()));
         }
         
         Producto productoActualizado = productoRepository.save(producto);
@@ -100,9 +101,9 @@ public class ProductoService {
         
         if (dto.getEstado() != null) {
             try {
-                producto.setEstado(Producto.Estado.valueOf(dto.getEstado().toUpperCase()));
+                producto.setEstado(Estado.valueOf(dto.getEstado().toUpperCase()));
             } catch (IllegalArgumentException e) {
-                producto.setEstado(Producto.Estado.ACTIVO);
+                producto.setEstado(Estado.ACTIVO);
             }
         }
         

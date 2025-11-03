@@ -7,6 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.ecommerce.backend.enums.Rol;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -48,21 +50,6 @@ public class Usuario implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Rol rol = Rol.CLIENTE;
-    
-    public enum Rol {
-        ADMIN("admin"),
-        CLIENTE("cliente");
-        
-        private final String value;
-        
-        Rol(String value) {
-            this.value = value;
-        }
-        
-        public String getValue() {
-            return value;
-        }
-    }
     
     // Constructors
     public Usuario() {}

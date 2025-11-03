@@ -10,6 +10,7 @@ import com.ecommerce.backend.dto.LoginDTO;
 import com.ecommerce.backend.dto.RegistroUsuarioDTO;
 import com.ecommerce.backend.dto.UsuarioDTO;
 import com.ecommerce.backend.entity.Usuario;
+import com.ecommerce.backend.enums.Rol;
 import com.ecommerce.backend.exception.BadRequestException;
 import com.ecommerce.backend.exception.EmailAlreadyExistsException;
 import com.ecommerce.backend.repository.UsuarioRepository;
@@ -45,7 +46,7 @@ public class AuthenticationService {
         usuario.setLastName(registroDTO.getLastName());
         usuario.setNombre(registroDTO.getFirstName() + " " + registroDTO.getLastName());
         usuario.setUser(registroDTO.getUser());
-        usuario.setRol(Usuario.Rol.CLIENTE);
+        usuario.setRol(Rol.CLIENTE);
         
         Usuario usuarioGuardado = usuarioRepository.save(usuario);
         return new UsuarioDTO(usuarioGuardado);

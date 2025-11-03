@@ -2,6 +2,8 @@ package com.ecommerce.backend.config;
 
 import com.ecommerce.backend.entity.Producto;
 import com.ecommerce.backend.entity.Usuario;
+import com.ecommerce.backend.enums.Estado;
+import com.ecommerce.backend.enums.Rol;
 import com.ecommerce.backend.repository.ProductoRepository;
 import com.ecommerce.backend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +50,7 @@ public class DataInitializer implements CommandLineRunner {
         admin.setFirstName("Admin");
         admin.setLastName("Sistema");
     admin.setUser("admin");
-        admin.setRol(Usuario.Rol.ADMIN);
+        admin.setRol(Rol.ADMIN);
 
         Usuario usuario = new Usuario();
         usuario.setEmail("usuario@shophub.com");
@@ -57,7 +59,7 @@ public class DataInitializer implements CommandLineRunner {
         usuario.setFirstName("Usuario");
         usuario.setLastName("Demo");
     usuario.setUser("usuario");
-        usuario.setRol(Usuario.Rol.CLIENTE);
+        usuario.setRol(Rol.CLIENTE);
 
         Usuario juan = new Usuario();
         juan.setEmail("juan@shophub.com");
@@ -66,7 +68,7 @@ public class DataInitializer implements CommandLineRunner {
         juan.setFirstName("Juan");
         juan.setLastName("Pérez");
     juan.setUser("juan");
-        juan.setRol(Usuario.Rol.CLIENTE);
+        juan.setRol(Rol.CLIENTE);
 
         Usuario maria = new Usuario();
         maria.setEmail("maria@shophub.com");
@@ -75,7 +77,7 @@ public class DataInitializer implements CommandLineRunner {
         maria.setFirstName("María");
         maria.setLastName("García");
     maria.setUser("maria");
-        maria.setRol(Usuario.Rol.CLIENTE);
+        maria.setRol(Rol.CLIENTE);
 
         usuarioRepository.saveAll(Arrays.asList(admin, usuario, juan, maria));
     }
@@ -89,7 +91,7 @@ public class DataInitializer implements CommandLineRunner {
         camara.setImagen("https://picsum.photos/id/250/800/600");
         camara.setCategoria("Fotografía");
         camara.setStock(0);
-        camara.setEstado(Producto.Estado.AGOTADO);
+        camara.setEstado(Estado.AGOTADO);
 
         // Producto 2
         Producto guantes = new Producto();
@@ -99,7 +101,7 @@ public class DataInitializer implements CommandLineRunner {
         guantes.setImagen("https://picsum.photos/id/345/800/600");
         guantes.setCategoria("Deportes");
         guantes.setStock(0);
-        guantes.setEstado(Producto.Estado.AGOTADO);
+        guantes.setEstado(Estado.AGOTADO);
         guantes.setImagenes(Arrays.asList(
             "https://picsum.photos/id/345/800/600",
             "https://picsum.photos/id/346/800/600",
@@ -120,7 +122,7 @@ public class DataInitializer implements CommandLineRunner {
         smartwatch.setImagen("https://picsum.photos/id/160/800/600");
         smartwatch.setCategoria("Tecnología");
         smartwatch.setStock(0);
-        smartwatch.setEstado(Producto.Estado.AGOTADO);
+        smartwatch.setEstado(Estado.AGOTADO);
         smartwatch.setImagenes(Arrays.asList(
             "https://picsum.photos/id/160/800/600",
             "https://picsum.photos/id/161/800/600",
@@ -141,7 +143,7 @@ public class DataInitializer implements CommandLineRunner {
         zapatillas.setImagen("https://picsum.photos/id/400/800/600");
         zapatillas.setCategoria("Deportes");
         zapatillas.setStock(25);
-        zapatillas.setEstado(Producto.Estado.ACTIVO);
+        zapatillas.setEstado(Estado.ACTIVO);
 
         // Producto 5
         Producto laptop = new Producto();
@@ -151,7 +153,7 @@ public class DataInitializer implements CommandLineRunner {
         laptop.setImagen("https://picsum.photos/id/201/800/600");
         laptop.setCategoria("Tecnología");
         laptop.setStock(12);
-        laptop.setEstado(Producto.Estado.ACTIVO);
+        laptop.setEstado(Estado.ACTIVO);
         laptop.setImagenes(Arrays.asList(
             "https://picsum.photos/id/201/800/600",
             "https://picsum.photos/id/202/800/600",
@@ -172,7 +174,7 @@ public class DataInitializer implements CommandLineRunner {
         raqueta.setImagen("https://picsum.photos/id/450/800/600");
         raqueta.setCategoria("Deportes");
         raqueta.setStock(18);
-        raqueta.setEstado(Producto.Estado.ACTIVO);
+        raqueta.setEstado(Estado.ACTIVO);
         raqueta.setImagenes(Arrays.asList(
             "https://picsum.photos/id/450/800/600",
             "https://picsum.photos/id/451/800/600",
@@ -193,7 +195,7 @@ public class DataInitializer implements CommandLineRunner {
         drone.setImagen("https://picsum.photos/id/300/800/600");
         drone.setCategoria("Fotografía");
         drone.setStock(10);
-        drone.setEstado(Producto.Estado.ACTIVO);
+        drone.setEstado(Estado.ACTIVO);
         drone.setImagenes(Arrays.asList(
             "https://picsum.photos/id/300/800/600",
             "https://picsum.photos/id/301/800/600",
@@ -214,7 +216,7 @@ public class DataInitializer implements CommandLineRunner {
         bicicleta.setImagen("https://picsum.photos/id/146/800/600");
         bicicleta.setCategoria("Deportes");
         bicicleta.setStock(8);
-        bicicleta.setEstado(Producto.Estado.ACTIVO);
+        bicicleta.setEstado(Estado.ACTIVO);
         bicicleta.setImagenes(Arrays.asList(
             "https://picsum.photos/id/146/800/600",
             "https://picsum.photos/id/147/800/600",
@@ -235,7 +237,7 @@ public class DataInitializer implements CommandLineRunner {
         auriculares.setImagen("https://picsum.photos/id/325/800/600");
         auriculares.setCategoria("Tecnología");
         auriculares.setStock(22);
-        auriculares.setEstado(Producto.Estado.ACTIVO);
+        auriculares.setEstado(Estado.ACTIVO);
         auriculares.setImagenes(Arrays.asList(
             "https://picsum.photos/id/325/800/600",
             "https://picsum.photos/id/326/800/600",
@@ -256,7 +258,7 @@ public class DataInitializer implements CommandLineRunner {
         mochila.setImagen("https://picsum.photos/id/250/800/600");
         mochila.setCategoria("Fotografía");
         mochila.setStock(15);
-        mochila.setEstado(Producto.Estado.ACTIVO);
+        mochila.setEstado(Estado.ACTIVO);
         mochila.setImagenes(Arrays.asList(
             "https://picsum.photos/id/250/800/600",
             "https://picsum.photos/id/251/800/600",
@@ -277,7 +279,7 @@ public class DataInitializer implements CommandLineRunner {
         pelota.setImagen("https://picsum.photos/id/358/800/600");
         pelota.setCategoria("Deportes");
         pelota.setStock(40);
-        pelota.setEstado(Producto.Estado.ACTIVO);
+        pelota.setEstado(Estado.ACTIVO);
         pelota.setImagenes(Arrays.asList(
             "https://picsum.photos/id/358/800/600",
             "https://picsum.photos/id/359/800/600",
@@ -298,7 +300,7 @@ public class DataInitializer implements CommandLineRunner {
         termo.setImagen("https://picsum.photos/id/225/800/600");
         termo.setCategoria("Accesorios");
         termo.setStock(35);
-        termo.setEstado(Producto.Estado.ACTIVO);
+        termo.setEstado(Estado.ACTIVO);
         termo.setImagenes(Arrays.asList(
             "https://picsum.photos/id/225/800/600",
             "https://picsum.photos/id/226/800/600",
