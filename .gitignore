@@ -1,5 +1,7 @@
 # Java / Maven
 backend/target/
+.m2/
+~/
 *.class
 *.jar
 *.war
