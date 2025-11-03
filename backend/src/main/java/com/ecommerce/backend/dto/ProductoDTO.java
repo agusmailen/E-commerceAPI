@@ -33,7 +33,7 @@ public class ProductoDTO {
     @NotNull(message = "La categoría es obligatoria")
     private Long categoriaId;
     
-    private String categoriaNombre;
+
     
     @NotNull(message = "El stock es obligatorio")
     @Min(value = 0, message = "El stock no puede ser negativo")
@@ -53,7 +53,6 @@ public class ProductoDTO {
         this.imagen = producto.getImagen();
         this.imagenes = new ArrayList<>(producto.getImagenes());
         this.categoriaId = producto.getCategoria() != null ? producto.getCategoria().getId() : null;
-        this.categoriaNombre = producto.getCategoria() != null ? producto.getCategoria().getNombre() : null;
         this.stock = producto.getStock();
         this.estado = producto.getEstado().getValue();
         this.detalles = new HashMap<>(producto.getDetalles());
