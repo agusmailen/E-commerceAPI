@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Run Backend (Debug)",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/backend",
+            "mainClass": "com.ecommerce.backend.BackendApplication",
+            "projectName": "backend",
+            "args": "",
+            "vmArgs": "-Dspring.profiles.active=default",
+            "preLaunchTask": "Start Postgres (Docker Compose)",
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
